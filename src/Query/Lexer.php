@@ -96,81 +96,22 @@ final class Lexer
     {
         $this->scanner->next();
         $string = '';
-        $escaped = false;
-        $isUnicode = false;
-        $unicode = array();
+        $previousChar = false;
 
         while (true) {
             if ($this->scanner->eof()) {
                 $this->error('Unclosed quote');
             }
-
             $next = $this->scanner->peek();
-
-            if ($isUnicode) {
-                if (count($unicode) < 4) {
-                    if (ctype_digit($next) === false && ctype_alpha($next) === false) {
-                        $this->error('Invalid escaped unicode');
-                    }
-                    var_dump($next);
-                    $unicode[] = $this->scanner->next();
-                    continue;
-                }
-                $isUnicode = false;
-                $escapedUnicode = implode('', $unicode);
-                $string .= '\\u' . $escapedUnicode;
-                continue;
+            if ($previousChar !== '\\' && $next === '"') {
+                $this->scanner->next();
+                break;
             }
-
-            if ($escaped === false) {
-                if ($next === '"') {
-                    $this->scanner->next();
-                    break;
-                }
-                if ($next === '\\') {
-                    $escaped = true;
-                    $this->scanner->next();
-                    continue;
-                }
-            }
-
-            if ($escaped) {
-                if ($next === 'b') {
-                    $string .= chr(8);
-                    $this->scanner->next();
-                    continue;
-                }
-                if ($next === 'n') {
-                    $string .= "\n";
-                    $this->scanner->next();
-                    continue;
-                }
-                if ($next === 'r') {
-                    $string .= "\r";
-                    $this->scanner->next();
-                    continue;
-                }
-                if ($next === 't') {
-                    $string .= "\t";
-                    $this->scanner->next();
-                    continue;
-                }
-                if ($next === 'f') {
-                    $string .= "\f";
-                    $this->scanner->next();
-                    continue;
-                }
-                if ($next === 'u') {
-                    $isUnicode = true;
-                    $this->scanner->next();
-                    continue;
-                }
-            }
-
-            $escaped = false;
-            $string .= $this->scanner->next();
+            $previousChar = $this->scanner->next();
+            $string .= $previousChar;
         }
 
+        $string = json_decode('"' . $string . '"');
         $this->emit(Token::T_STRING, $string);
     }
 

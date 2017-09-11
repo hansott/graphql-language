@@ -338,7 +338,7 @@ final class ParserTest extends TestCase
                 )
             ),
             array(
-                '{ author(name: "a\\"a\\ba\\ta\\na\\ra\\f\\\\a \\ud83d\\ude00") }',
+                '{ author(name: "\\" \\n \\t \\r \\ud83d\\ude00") }',
                 new Document(
                     array(
                         new DefinitionOperationQuery(
@@ -351,7 +351,7 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('name', new ValueString('a"a' . chr(8) . "\ta\na\ra\f\\a 😀")),
+                                            new SelectionFieldArgument('name', new ValueString("\" \n \t \r 😀")),
                                         )
                                     ),
                                 )
