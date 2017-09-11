@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-abstract class DefinitionOperationBase implements DefinitionOperation
+abstract class OperationBase implements Operation
 {
     public $name;
     public $variables;

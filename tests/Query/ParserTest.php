@@ -92,7 +92,7 @@ final class ParserTest extends TestCase
                 '{ author }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),
@@ -109,7 +109,7 @@ final class ParserTest extends TestCase
                 '{ author { name } }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),
@@ -136,7 +136,7 @@ final class ParserTest extends TestCase
                 '{ author() { name() } }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),
@@ -163,7 +163,7 @@ final class ParserTest extends TestCase
                 '{ author(id: 1) }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),
@@ -186,7 +186,7 @@ final class ParserTest extends TestCase
                 '{ author(id: 1, name: "Hans Ott") }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),
@@ -210,7 +210,7 @@ final class ParserTest extends TestCase
                 'query { author(id: 1, name: "Hans Ott") }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),
@@ -234,7 +234,7 @@ final class ParserTest extends TestCase
                 'query name { author(id: 1, name: "Hans Ott") }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             'name',
                             array(),
                             array(),
@@ -259,7 +259,7 @@ final class ParserTest extends TestCase
                 . ' fragment authorFragment on Author { name }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),
@@ -279,7 +279,7 @@ final class ParserTest extends TestCase
                                 )
                             )
                         ),
-                        new DefinitionFragment(
+                        new Fragment(
                             'authorFragment',
                             new TypeCondition('Author'),
                             array(),
@@ -296,7 +296,7 @@ final class ParserTest extends TestCase
                 '{ handle { name ... on Page { likes } ... on User { email } } }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),
@@ -341,7 +341,7 @@ final class ParserTest extends TestCase
                 '{ author(name: "\\" \\n \\t \\r \\ud83d\\ude00") }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),
@@ -364,7 +364,7 @@ final class ParserTest extends TestCase
                 '{ author(id: [1, $name, PUBLISHED, "string", 1.0, null, true, false, ["nested list"], { nestedObject: { nestedObject: {} } }]) }',
                 new Document(
                     array(
-                        new DefinitionOperationQuery(
+                        new OperationQuery(
                             null,
                             array(),
                             array(),

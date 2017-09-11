@@ -292,7 +292,7 @@ final class Parser
             $typeCondition = $this->parseTypeCondition();
             $selectionSet = $this->parseSelectionSet();
 
-            return new DefinitionFragment($name, $typeCondition, array(), $selectionSet);
+            return new Fragment($name, $typeCondition, array(), $selectionSet);
         }
 
         if ($this->is(Token::T_MUTATION)) {
@@ -300,7 +300,7 @@ final class Parser
             $name = $this->expect(Token::T_NAME)->value;
             $selectionSet = $this->parseSelectionSet();
 
-            return new DefinitionOperationMutation($name, array(), array(), $selectionSet);
+            return new OperationMutation($name, array(), array(), $selectionSet);
         }
 
         if ($this->is(Token::T_SUBSCRIPTION)) {
@@ -308,7 +308,7 @@ final class Parser
             $name = $this->expect(Token::T_NAME)->value;
             $selectionSet = $this->parseSelectionSet();
 
-            return new DefinitionOperationSubscription($name, array(), array(), $selectionSet);
+            return new OperationSubscription($name, array(), array(), $selectionSet);
         }
 
         if ($this->is(Token::T_QUERY)) {
@@ -321,13 +321,13 @@ final class Parser
 
             $selectionSet = $this->parseSelectionSet();
 
-            return new DefinitionOperationQuery($name, array(), array(), $selectionSet);
+            return new OperationQuery($name, array(), array(), $selectionSet);
         }
 
         if ($this->is(Token::T_BRACE_LEFT)) {
             $selectionSet = $this->parseSelectionSet();
 
-            return new DefinitionOperationQuery(null, array(), array(), $selectionSet);
+            return new OperationQuery(null, array(), array(), $selectionSet);
         }
 
         $message = 'Expected a query, a query shorthand, a mutation or a subscription';

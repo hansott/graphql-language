@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class DefinitionOperationMutation extends DefinitionOperationBase implements DefinitionOperation
+final class OperationMutation extends OperationBase implements Operation
 {
     public function __construct($name, array $variables = array(), $directives = array(), SelectionSet $selectionSet)
     {

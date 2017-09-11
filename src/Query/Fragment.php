@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class DefinitionFragment implements Definition
+final class Fragment implements Definition
 {
     public $name;
     public $typeCondition;
