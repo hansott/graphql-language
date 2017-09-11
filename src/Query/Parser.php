@@ -77,7 +77,7 @@ final class Parser
             $this->accept(Token::T_COMMA);
         }
 
-        return $items;
+        return new ValueList($items);
     }
 
     private function parseValue()
@@ -92,6 +92,10 @@ final class Parser
 
         if ($this->accept(Token::T_FALSE)) {
             return new ValueBool(false);
+        }
+
+        if ($this->accept(Token::T_NULL)) {
+            return new ValueNull;
         }
 
         if ($integer = $this->accept(Token::T_INTEGER)) {

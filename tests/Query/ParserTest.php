@@ -360,6 +360,41 @@ final class ParserTest extends TestCase
                     )
                 )
             ),
+            array(
+                '{ author(id: [1, "string", 1.0, null, true, false,]) }',
+                new Document(
+                    array(
+                        new DefinitionOperationQuery(
+                            null,
+                            array(),
+                            array(),
+                            new SelectionSet(
+                                array(
+                                    new SelectionField(
+                                        null,
+                                        'author',
+                                        array(
+                                            new SelectionFieldArgument(
+                                                'id',
+                                                new ValueList(
+                                                    array(
+                                                        new ValueInteger(1),
+                                                        new ValueString('string'),
+                                                        new ValueFloat(1.0),
+                                                        new ValueNull,
+                                                        new ValueBool(true),
+                                                        new ValueBool(false),
+                                                    )
+                                                )
+                                            ),
+                                        )
+                                    ),
+                                )
+                            )
+                        ),
+                    )
+                )
+            ),
         );
     }
 }
