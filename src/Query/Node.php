@@ -5,7 +5,7 @@ namespace HansOtt\GraphQL\Query;
 interface Node
 {
     /**
-     * @return array
+     * @return Node[]
      */
     public function getChildren();
 }
