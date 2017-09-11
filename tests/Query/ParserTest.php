@@ -500,6 +500,64 @@ final class ParserTest extends TestCase
                     )
                 )
             ),
+            array(
+                'query Hero($episode: Episode, $withFriends: Boolean!) { hero(episode: $episode) { name friends @include(if: $withFriends) { name } } }',
+                new Document(
+                    array(
+                        new OperationQuery(
+                            'Hero',
+                            array(
+                                new VariableDefinition(
+                                    new ValueVariable('episode'),
+                                    new TypeNamed('Episode')
+                                ),
+                                new VariableDefinition(
+                                    new ValueVariable('withFriends'),
+                                    new TypeNonNull(
+                                        new TypeNamed('Boolean')
+                                    )
+                                ),
+                            ),
+                            array(),
+                            new SelectionSet(
+                                array(
+                                    new SelectionField(
+                                        null,
+                                        'hero',
+                                        array(
+                                            new Argument('episode', new ValueVariable('episode')),
+                                        ),
+                                        array(),
+                                        new SelectionSet(
+                                            array(
+                                                new SelectionField(null, 'name'),
+                                                new SelectionField(
+                                                    null,
+                                                    'friends',
+                                                    array(),
+                                                    array(
+                                                        new Directive(
+                                                            'include',
+                                                            array(
+                                                                new Argument('if', new ValueVariable('withFriends')),
+                                                            )
+                                                        ),
+                                                    ),
+                                                    new SelectionSet(
+                                                        array(
+                                                            new SelectionField(null, 'name'),
+                                                        )
+                                                    )
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
         );
     }
 }
