@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class Document
+final class Document implements Node
 {
     public $definitions;
 
@@ -12,5 +12,10 @@ final class Document
     public function __construct(array $definitions = array())
     {
         $this->definitions = $definitions;
+    }
+
+    public function getChildren()
+    {
+        return $this->definitions;
     }
 }

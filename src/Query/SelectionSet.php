@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class SelectionSet
+final class SelectionSet implements Node
 {
     public $selections;
 
@@ -12,5 +12,10 @@ final class SelectionSet
     public function __construct(array $selections)
     {
         $this->selections = $selections;
+    }
+
+    public function getChildren()
+    {
+        return $this->selections;
     }
 }

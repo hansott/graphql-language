@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class SelectionInlineFragment
+final class SelectionInlineFragment implements Selection
 {
     public $typeCondition;
     public $directives;
@@ -13,5 +13,10 @@ final class SelectionInlineFragment
         $this->typeCondition = $typeCondition;
         $this->directives = $directives;
         $this->selectionSet = $selectionSet;
+    }
+
+    public function getChildren()
+    {
+        return array($this->selectionSet);
     }
 }

@@ -16,4 +16,9 @@ final class Fragment implements Definition
         $this->directives = $directives;
         $this->selectionSet = $selectionSet;
     }
+
+    public function getChildren()
+    {
+        return array($this->selectionSet);
+    }
 }

@@ -18,4 +18,9 @@ final class SelectionField implements Selection
         $this->directives = $directives;
         $this->selectionSet = $selectionSet;
     }
+
+    public function getChildren()
+    {
+        return array($this->selectionSet);
+    }
 }

@@ -10,4 +10,9 @@ final class SelectionFragmentSpread implements Selection
     {
         $this->fragmentName = (string) $fragmentName;
     }
+
+    public function getChildren()
+    {
+        return array();
+    }
 }

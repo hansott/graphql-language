@@ -2,6 +2,6 @@
 
 namespace HansOtt\GraphQL\Query;
 
-interface Selection
+interface Selection extends Node
 {
 }

@@ -15,11 +15,16 @@ abstract class OperationBase implements Operation
      * @param array $directives
      * @param SelectionSet $selectionSet
      */
-    public function __construct($name = null, array $variables = array(), $directives = array(), SelectionSet $selectionSet)
+    final public function __construct($name = null, array $variables = array(), $directives = array(), SelectionSet $selectionSet)
     {
         $this->name = $name;
         $this->variables = $variables;
         $this->directives = $directives;
         $this->selectionSet = $selectionSet;
+    }
+
+    final public function getChildren()
+    {
+        return array($this->selectionSet);
     }
 }

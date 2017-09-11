@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueObject
+final class ValueObject implements Value
 {
     private $properties;
 

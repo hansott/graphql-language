@@ -2,6 +2,6 @@
 
 namespace HansOtt\GraphQL\Query;
 
-interface Definition
+interface Definition extends Node
 {
 }
