@@ -196,13 +196,13 @@ final class Lexer
     {
         $integerPart = $this->integerPart();
         if ($this->scanner->eof()) {
-            $this->emit(Token::T_INTEGER, $integerPart);
+            $this->emit(Token::T_INT, $integerPart);
             return;
         }
 
         $next = $this->scanner->peek();
         if ($next !== '.' && $next !== 'e' && $next !== 'E') {
-            $this->emit(Token::T_INTEGER, $integerPart);
+            $this->emit(Token::T_INT, $integerPart);
             return;
         }
 

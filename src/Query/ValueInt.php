@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueInteger implements Value
+final class ValueInt implements Value
 {
     public $value;
 

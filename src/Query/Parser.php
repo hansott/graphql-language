@@ -121,8 +121,8 @@ final class Parser
             return new ValueNull;
         }
 
-        if ($integer = $this->accept(Token::T_INTEGER)) {
-            return new ValueInteger($integer->value);
+        if ($int = $this->accept(Token::T_INT)) {
+            return new ValueInt($int->value);
         }
 
         if ($float = $this->accept(Token::T_FLOAT)) {

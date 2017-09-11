@@ -173,7 +173,7 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('id', new ValueInteger(1)),
+                                            new SelectionFieldArgument('id', new ValueInt(1)),
                                         )
                                     ),
                                 )
@@ -196,7 +196,7 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('id', new ValueInteger(1)),
+                                            new SelectionFieldArgument('id', new ValueInt(1)),
                                             new SelectionFieldArgument('name', new ValueString("Hans Ott")),
                                         )
                                     ),
@@ -220,7 +220,7 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('id', new ValueInteger(1)),
+                                            new SelectionFieldArgument('id', new ValueInt(1)),
                                             new SelectionFieldArgument('name', new ValueString("Hans Ott")),
                                         )
                                     ),
@@ -244,7 +244,7 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('id', new ValueInteger(1)),
+                                            new SelectionFieldArgument('id', new ValueInt(1)),
                                             new SelectionFieldArgument('name', new ValueString("Hans Ott")),
                                         )
                                     ),
@@ -378,7 +378,7 @@ final class ParserTest extends TestCase
                                                 'id',
                                                 new ValueList(
                                                     array(
-                                                        new ValueInteger(1),
+                                                        new ValueInt(1),
                                                         new ValueEnum('PUBLISHED'),
                                                         new ValueString('string'),
                                                         new ValueFloat(1.0),

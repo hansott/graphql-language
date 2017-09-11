@@ -9,7 +9,7 @@ final class Token
     const T_NAME = 0;
     const T_STRING = 1;
     const T_FLOAT = 2;
-    const T_INTEGER = 3;
+    const T_INT = 3;
     const T_TRUE = 4;
     const T_FALSE = 5;
     const T_NULL = 6;
