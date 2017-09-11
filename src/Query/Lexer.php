@@ -243,6 +243,7 @@ final class Lexer
             '[' => Token::T_BRACKET_LEFT,
             ']' => Token::T_BRACKET_RIGHT,
             '=' => Token::T_EQUAL,
+            '@' => Token::T_AT,
         );
 
         while ($this->scanner->eof() === false) {

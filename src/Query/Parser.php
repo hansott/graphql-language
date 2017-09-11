@@ -163,7 +163,7 @@ final class Parser
         $this->error($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
     }
 
-    private function parseFieldArgument()
+    private function parseArgument()
     {
         $name = $this->expect(Token::T_NAME)->value;
         $this->expect(Token::T_COLON);
@@ -172,10 +172,15 @@ final class Parser
         return new Argument($name, $value);
     }
 
-    private function parseFieldArguments()
+    private function parseArgumentList()
     {
-        $this->expect(Token::T_PAREN_LEFT);
         $arguments = array();
+
+        if ($this->is(Token::T_PAREN_LEFT) === false) {
+            return $arguments;
+        }
+
+        $this->expect(Token::T_PAREN_LEFT);
 
         while (true) {
             if ($this->scanner->eof()) {
@@ -186,7 +191,7 @@ final class Parser
                 break;
             }
 
-            $arguments[] = $this->parseFieldArgument();
+            $arguments[] = $this->parseArgument();
             $this->accept(Token::T_COMMA);
         }
 
@@ -196,18 +201,15 @@ final class Parser
     private function parseField()
     {
         $name = $this->expect(Token::T_NAME)->value;
-
-        $arguments = array();
-        if ($this->is(Token::T_PAREN_LEFT)) {
-            $arguments = $this->parseFieldArguments();
-        }
+        $arguments = $this->parseArgumentList();
+        $directives = $this->parseDirectiveList();
 
         $selectionSet = null;
         if ($this->is(Token::T_BRACE_LEFT)) {
             $selectionSet = $this->parseSelectionSet();
         }
 
-        return new SelectionField(null, $name, $arguments, array(), $selectionSet);
+        return new SelectionField(null, $name, $arguments, $directives, $selectionSet);
     }
 
     private function parseFragment()
@@ -221,9 +223,10 @@ final class Parser
 
         $this->scanner->back();
         $typeCondition = $this->parseTypeCondition();
+        $directives = $this->parseDirectiveList();
         $selectionSet = $this->parseSelectionSet();
 
-        return new SelectionInlineFragment($typeCondition, array(), $selectionSet);
+        return new SelectionInlineFragment($typeCondition, $directives, $selectionSet);
     }
 
     private function parseSelection()
@@ -332,6 +335,25 @@ final class Parser
         $this->error($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
     }
 
+    private function parseDirective()
+    {
+        $this->expect(Token::T_AT);
+        $name = $this->expect(Token::T_NAME)->value;
+        $arguments = $this->parseArgumentList();
+
+        return new Directive($name, $arguments);
+    }
+
+    private function parseDirectiveList()
+    {
+        $directives = array();
+        while ($this->is(Token::T_AT)) {
+            $directives[] = $this->parseDirective();
+        }
+
+        return $directives;
+    }
+
     private function parseVariableDefinition()
     {
         $variable = $this->parseVariable();
@@ -383,27 +405,30 @@ final class Parser
             }
 
             $typeCondition = $this->parseTypeCondition();
+            $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new Fragment($name, $typeCondition, array(), $selectionSet);
+            return new Fragment($name, $typeCondition, $directives, $selectionSet);
         }
 
         if ($this->is(Token::T_MUTATION)) {
             $this->expect(Token::T_MUTATION);
             $name = $this->expect(Token::T_NAME)->value;
             $variables = $this->parseVariableDefinitionList();
+            $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationMutation($name, $variables, array(), $selectionSet);
+            return new OperationMutation($name, $variables, $directives, $selectionSet);
         }
 
         if ($this->is(Token::T_SUBSCRIPTION)) {
             $this->expect(Token::T_SUBSCRIPTION);
             $name = $this->expect(Token::T_NAME)->value;
             $variables = $this->parseVariableDefinitionList();
+            $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationSubscription($name, $variables, array(), $selectionSet);
+            return new OperationSubscription($name, $variables, $directives, $selectionSet);
         }
 
         if ($this->is(Token::T_QUERY)) {
@@ -415,9 +440,10 @@ final class Parser
             }
 
             $variables = $this->parseVariableDefinitionList();
+            $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationQuery($name, $variables, array(), $selectionSet);
+            return new OperationQuery($name, $variables, $directives, $selectionSet);
         }
 
         if ($this->is(Token::T_BRACE_LEFT)) {
