@@ -103,8 +103,20 @@ final class Parser
         return new ValueList($items);
     }
 
+    private function parseVariable()
+    {
+        $this->expect(Token::T_DOLLAR);
+        $name = $this->expect(Token::T_NAME)->value;
+
+        return new ValueVariable($name);
+    }
+
     private function parseValue()
     {
+        if ($this->is(Token::T_DOLLAR)) {
+            return $this->parseVariable();
+        }
+
         if ($string = $this->accept(Token::T_STRING)) {
             return new ValueString($string->value);
         }

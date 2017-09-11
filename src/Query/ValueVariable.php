@@ -4,14 +4,10 @@ namespace HansOtt\GraphQL\Query;
 
 final class ValueVariable implements Value
 {
-    private $name;
-    private $defaultValue;
-    private $type;
+    public $name;
 
-    public function __construct($name, Type $type, Value $defaultValue = null)
+    public function __construct($name)
     {
         $this->name = (string) $name;
-        $this->type = $type;
-        $this->defaultValue = $defaultValue;
     }
 }
