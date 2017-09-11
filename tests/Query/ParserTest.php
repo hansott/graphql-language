@@ -466,6 +466,40 @@ final class ParserTest extends TestCase
                     )
                 )
             ),
+            array(
+                'query myQuery($someTest: Boolean) { experimentalField @skip(if: $someTest) }',
+                new Document(
+                    array(
+                        new OperationQuery(
+                            'myQuery',
+                            array(
+                                new VariableDefinition(
+                                    new ValueVariable('someTest'),
+                                    new TypeNamed('Boolean')
+                                ),
+                            ),
+                            array(),
+                            new SelectionSet(
+                                array(
+                                    new SelectionField(
+                                        null,
+                                        'experimentalField',
+                                        array(),
+                                        array(
+                                            new Directive(
+                                                'skip',
+                                                array(
+                                                    new Argument('if', new ValueVariable('someTest')),
+                                                )
+                                            )
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            ),
         );
     }
 }
