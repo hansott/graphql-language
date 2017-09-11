@@ -361,7 +361,7 @@ final class ParserTest extends TestCase
                 )
             ),
             array(
-                '{ author(id: [1, "string", 1.0, null, true, false,]) }',
+                '{ author(id: [1, "string", 1.0, null, true, false, ["nested list"], { nestedObject: { nestedObject: {} } }]) }',
                 new Document(
                     array(
                         new DefinitionOperationQuery(
@@ -384,6 +384,20 @@ final class ParserTest extends TestCase
                                                         new ValueNull,
                                                         new ValueBool(true),
                                                         new ValueBool(false),
+                                                        new ValueList(
+                                                            array(
+                                                                new ValueString('nested list'),
+                                                            )
+                                                        ),
+                                                        new ValueObject(
+                                                            array(
+                                                                'nestedObject' => new ValueObject(
+                                                                    array(
+                                                                        'nestedObject' => new ValueObject(array()),
+                                                                    )
+                                                                )
+                                                            )
+                                                        )
                                                     )
                                                 )
                                             ),

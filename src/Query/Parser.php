@@ -59,6 +59,29 @@ final class Parser
         return $token->type === $tokenType;
     }
 
+    private function parseObject()
+    {
+        $this->expect(Token::T_BRACE_LEFT);
+        $properties = array();
+
+        while (true) {
+            if ($this->scanner->eof()) {
+                $this->error('Unclosed brace of object');
+            }
+
+            if ($this->accept(Token::T_BRACE_RIGHT)) {
+                break;
+            }
+
+            $name = $this->expect(Token::T_NAME)->value;
+            $this->expect(Token::T_COLON);
+            $properties[$name] = $this->parseValue();
+            $this->accept(Token::T_COMMA);
+        }
+
+        return new ValueObject($properties);
+    }
+
     private function parseList()
     {
         $this->expect(Token::T_BRACKET_LEFT);
@@ -110,8 +133,18 @@ final class Parser
             return $this->parseList();
         }
 
+        if ($this->is(Token::T_BRACE_LEFT)) {
+            return $this->parseObject();
+        }
+
+        $message = 'Expected a value';
+
+        if ($this->scanner->eof()) {
+            $this->error($message . ' but instead reached end');
+        }
+
         $token = $this->scanner->peek();
-        $this->error("Expected a value but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
+        $this->error($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
     }
 
     private function parseFieldArgument()
@@ -187,9 +220,7 @@ final class Parser
             return $this->parseField();
         }
 
-        $tokenNameName = Token::getNameFor(Token::T_NAME);
-        $tokenSpreadName = Token::getNameFor(Token::T_SPREAD);
-        $message = "Expected \"{$tokenNameName}\" (field) or \"{$tokenSpreadName}\" (fragment spread / inline fragment)";
+        $message = 'Expected a field, a fragment spread or an inline fragment';
 
         if ($this->scanner->eof()) {
             $this->error($message . ' but instead reached end');
@@ -224,7 +255,7 @@ final class Parser
         $on = $this->expect(Token::T_NAME)->value;
         if ($on !== 'on') {
             $tokenNameName = Token::getNameFor(Token::T_NAME);
-            $this->error("Expected \"on\" but instead found \"{$tokenNameName}\" with value \"{$on}\"");
+            $this->error("Expected a type condition but instead found \"{$tokenNameName}\" with value \"{$on}\"");
         }
 
         $namedType = $this->expect(Token::T_NAME)->value;
@@ -283,21 +314,14 @@ final class Parser
             return new DefinitionOperationQuery(null, array(), array(), $selectionSet);
         }
 
-        $queryTokenName = Token::getNameFor(Token::T_QUERY);
-        $braceLeftTokenName = Token::getNameFor(Token::T_BRACE_LEFT);
-        $mutationTokenName = Token::getNameFor(Token::T_MUTATION);
-        $subscriptionTokenName = Token::getNameFor(Token::T_SUBSCRIPTION);
-        $message = "Expected \"{$queryTokenName}\", \"{$braceLeftTokenName}\" (query shorthand),"
-            . " \"{$mutationTokenName}\" or \"{$subscriptionTokenName}\\";
+        $message = 'Expected a query, a query shorthand, a mutation or a subscription';
 
         if ($this->scanner->eof()) {
             $this->error($message . ' but instead reached end');
         }
 
         $token = $this->scanner->peek();
-        $this->error(
-            $message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\""
-        );
+        $this->error($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
     }
 
     private function parseDocument()
@@ -305,7 +329,11 @@ final class Parser
         $definitions = array();
         while ($this->scanner->eof() === false) {
             $definition = $this->parseDefinition();
-            if (empty($definitions) === false && $definition instanceof DefinitionOperationQuery && $definition->name === null) {
+            if (
+                empty($definitions) === false
+                && $definition instanceof DefinitionOperationQuery
+                && $definition->name === null
+            ) {
                 throw new ParseError('You need to specify a name for your query if there are more then one queries');
             }
             $definitions[] = $definition;
