@@ -2,14 +2,14 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class SelectionFieldArgument
+final class Argument
 {
     public $name;
     public $value;
 
     public function __construct($name, Value $value)
     {
-        $this->name = $name;
+        $this->name = (string) $name;
         $this->value = $value;
     }
 }

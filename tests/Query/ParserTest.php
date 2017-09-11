@@ -173,7 +173,7 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('id', new ValueInt(1)),
+                                            new Argument('id', new ValueInt(1)),
                                         )
                                     ),
                                 )
@@ -196,8 +196,8 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('id', new ValueInt(1)),
-                                            new SelectionFieldArgument('name', new ValueString("Hans Ott")),
+                                            new Argument('id', new ValueInt(1)),
+                                            new Argument('name', new ValueString("Hans Ott")),
                                         )
                                     ),
                                 )
@@ -220,8 +220,8 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('id', new ValueInt(1)),
-                                            new SelectionFieldArgument('name', new ValueString("Hans Ott")),
+                                            new Argument('id', new ValueInt(1)),
+                                            new Argument('name', new ValueString("Hans Ott")),
                                         )
                                     ),
                                 )
@@ -244,8 +244,8 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('id', new ValueInt(1)),
-                                            new SelectionFieldArgument('name', new ValueString("Hans Ott")),
+                                            new Argument('id', new ValueInt(1)),
+                                            new Argument('name', new ValueString("Hans Ott")),
                                         )
                                     ),
                                 )
@@ -357,7 +357,7 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument('name', new ValueString("\" \n \t \r 😀")),
+                                            new Argument('name', new ValueString("\" \n \t \r 😀")),
                                         )
                                     ),
                                 )
@@ -380,7 +380,7 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new SelectionFieldArgument(
+                                            new Argument(
                                                 'id',
                                                 new ValueList(
                                                     array(
@@ -437,7 +437,7 @@ final class ParserTest extends TestCase
                                         null,
                                         'user',
                                         array(
-                                            new SelectionFieldArgument(
+                                            new Argument(
                                                 'id',
                                                 new ValueInt(4)
                                             )
@@ -451,7 +451,7 @@ final class ParserTest extends TestCase
                                                     null,
                                                     'profilePic',
                                                     array(
-                                                        new SelectionFieldArgument(
+                                                        new Argument(
                                                             'size',
                                                             new ValueVariable('devicePicSize')
                                                         )

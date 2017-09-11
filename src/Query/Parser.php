@@ -169,7 +169,7 @@ final class Parser
         $this->expect(Token::T_COLON);
         $value = $this->parseValue();
 
-        return new SelectionFieldArgument($name, $value);
+        return new Argument($name, $value);
     }
 
     private function parseFieldArguments()
