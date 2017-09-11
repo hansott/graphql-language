@@ -1,4 +1,4 @@
-# GraphQL Parser
+# GraphQL Language
 
 [![Latest Version on Packagist][ico-version]][link-packagist]
 [![Software License][ico-license]](LICENSE.md)
@@ -7,14 +7,14 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-This package can be used to parse a GraphQL query into an abstract syntax tree. The parser is able to parse the full [spec](https://facebook.github.io/graphql/).
+This library contains a parser that can parse a GraphQL query into an abstract syntax tree. The parser is able to parse the full [spec](https://facebook.github.io/graphql/).
 
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require hansott/graphql-parser
+$ composer require hansott/graphql-language
 ```
 
 ## Usage
@@ -72,17 +72,17 @@ If you discover any security related issues, please email hansott@hotmail.be ins
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
-[ico-version]: https://img.shields.io/packagist/v/hansott/graphql-parser.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/hansott/graphql-language.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/hansott/graphql-parser/master.svg?style=flat-square
-[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/hansott/graphql-parser.svg?style=flat-square
-[ico-code-quality]: https://img.shields.io/scrutinizer/g/hansott/graphql-parser.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/hansott/graphql-parser.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/hansott/graphql-language/master.svg?style=flat-square
+[ico-scrutinizer]: https://img.shields.io/scrutinizer/coverage/g/hansott/graphql-language.svg?style=flat-square
+[ico-code-quality]: https://img.shields.io/scrutinizer/g/hansott/graphql-language.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/hansott/graphql-language.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/hansott/graphql-parser
-[link-travis]: https://travis-ci.org/hansott/graphql-parser
-[link-scrutinizer]: https://scrutinizer-ci.com/g/hansott/graphql-parser/code-structure
-[link-code-quality]: https://scrutinizer-ci.com/g/hansott/graphql-parser
-[link-downloads]: https://packagist.org/packages/hansott/graphql-parser
+[link-packagist]: https://packagist.org/packages/hansott/graphql-language
+[link-travis]: https://travis-ci.org/hansott/graphql-language
+[link-scrutinizer]: https://scrutinizer-ci.com/g/hansott/graphql-language/code-structure
+[link-code-quality]: https://scrutinizer-ci.com/g/hansott/graphql-language
+[link-downloads]: https://packagist.org/packages/hansott/graphql-language
 [link-author]: https://github.com/hansott
 [link-contributors]: ../../contributors

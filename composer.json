@@ -1,13 +1,13 @@
 {
-    "name": "hansott/graphql-parser",
+    "name": "hansott/graphql-language",
     "type": "library",
-    "description": "A graphQL query parser",
+    "description": "Library to deal with the GraphQL language",
     "keywords": [
         "hansott",
         "graphql",
         "parser"
     ],
-    "homepage": "https://github.com/hansott/graphql-parser",
+    "homepage": "https://github.com/hansott/graphql-language",
     "license": "MIT",
     "authors": [
         {
