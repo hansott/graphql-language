@@ -4,10 +4,10 @@ namespace HansOtt\GraphQL\Query;
 
 final class ValueEnum implements Value
 {
-    private $enum;
+    public $value;
 
-    public function __construct($enum)
+    public function __construct($value)
     {
-        $this->enum = (string) $enum;
+        $this->value = (string) $value;
     }
 }
