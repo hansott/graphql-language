@@ -467,7 +467,7 @@ final class ParserTest extends TestCase
                 )
             ),
             array(
-                'query myQuery($someTest: Boolean) { experimentalField @skip(if: $someTest) }',
+                'query myQuery($someTest: Boolean) { alias: experimentalField @skip(if: $someTest) }',
                 new Document(
                     array(
                         new OperationQuery(
@@ -482,7 +482,7 @@ final class ParserTest extends TestCase
                             new SelectionSet(
                                 array(
                                     new SelectionField(
-                                        null,
+                                        'alias',
                                         'experimentalField',
                                         array(),
                                         array(

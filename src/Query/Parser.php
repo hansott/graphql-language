@@ -201,6 +201,15 @@ final class Parser
     private function parseField()
     {
         $name = $this->expect(Token::T_NAME)->value;
+
+        $alias = null;
+        if ($this->is(Token::T_COLON)) {
+            $this->expect(Token::T_COLON);
+            $aliasToken = $this->expect(Token::T_NAME);
+            $alias = $name;
+            $name = $aliasToken->value;
+        }
+
         $arguments = $this->parseArgumentList();
         $directives = $this->parseDirectiveList();
 
@@ -209,7 +218,7 @@ final class Parser
             $selectionSet = $this->parseSelectionSet();
         }
 
-        return new SelectionField(null, $name, $arguments, $directives, $selectionSet);
+        return new SelectionField($alias, $name, $arguments, $directives, $selectionSet);
     }
 
     private function parseFragment()
