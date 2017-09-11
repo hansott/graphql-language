@@ -28,6 +28,7 @@ final class ParserTest extends TestCase
             array('-0.0e'),
             array('0.0ea'),
             array('-0.0ea'),
+            array('"'),
         );
     }
 
