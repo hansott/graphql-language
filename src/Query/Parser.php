@@ -344,15 +344,7 @@ final class Parser
     {
         $definitions = array();
         while ($this->scanner->eof() === false) {
-            $definition = $this->parseDefinition();
-            if (
-                empty($definitions) === false
-                && $definition instanceof DefinitionOperationQuery
-                && $definition->name === null
-            ) {
-                throw new ParseError('You need to specify a name for your query if there are more then one queries');
-            }
-            $definitions[] = $definition;
+            $definitions[] = $this->parseDefinition();
         }
 
         return new Document($definitions);

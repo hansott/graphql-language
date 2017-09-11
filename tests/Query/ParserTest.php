@@ -53,7 +53,6 @@ final class ParserTest extends TestCase
             array('{ author(1: "Hans Ott")'),
             array('{ author {'),
             array('{ fragment on { name } }'),
-            array('{ name } { name }'),
             array('{ author(id: [) }'),
         );
     }
