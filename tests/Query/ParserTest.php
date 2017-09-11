@@ -390,8 +390,8 @@ final class ParserTest extends TestCase
                                                         new ValueString('string'),
                                                         new ValueFloat(1.0),
                                                         new ValueNull,
-                                                        new ValueBool(true),
-                                                        new ValueBool(false),
+                                                        new ValueBoolean(true),
+                                                        new ValueBoolean(false),
                                                         new ValueList(
                                                             array(
                                                                 new ValueString('nested list'),

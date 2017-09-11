@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueBool implements Value
+final class ValueBoolean implements Value
 {
     private $isTrue;
 

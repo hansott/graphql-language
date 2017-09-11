@@ -122,11 +122,11 @@ final class Parser
         }
 
         if ($this->accept(Token::T_TRUE)) {
-            return new ValueBool(true);
+            return new ValueBoolean(true);
         }
 
         if ($this->accept(Token::T_FALSE)) {
-            return new ValueBool(false);
+            return new ValueBoolean(false);
         }
 
         if ($this->accept(Token::T_NULL)) {
