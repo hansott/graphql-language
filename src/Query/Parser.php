@@ -129,6 +129,10 @@ final class Parser
             return new ValueFloat($float->value);
         }
 
+        if ($name = $this->accept(Token::T_NAME)) {
+            return new ValueEnum($name->value);
+        }
+
         if ($this->is(Token::T_BRACKET_LEFT)) {
             return $this->parseList();
         }
