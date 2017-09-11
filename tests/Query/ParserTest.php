@@ -281,7 +281,9 @@ final class ParserTest extends TestCase
                         ),
                         new Fragment(
                             'authorFragment',
-                            new TypeCondition('Author'),
+                            new TypeCondition(
+                                new TypeNamed('Author')
+                            ),
                             array(),
                             new SelectionSet(
                                 array(
@@ -311,7 +313,9 @@ final class ParserTest extends TestCase
                                             array(
                                                 new SelectionField(null, 'name'),
                                                 new SelectionInlineFragment(
-                                                    new TypeCondition('Page'),
+                                                    new TypeCondition(
+                                                        new TypeNamed('Page')
+                                                    ),
                                                     array(),
                                                     new SelectionSet(
                                                         array(
@@ -320,7 +324,9 @@ final class ParserTest extends TestCase
                                                     )
                                                 ),
                                                 new SelectionInlineFragment(
-                                                    new TypeCondition('User'),
+                                                    new TypeCondition(
+                                                        new TypeNamed('User')
+                                                    ),
                                                     array(),
                                                     new SelectionSet(
                                                         array(
@@ -420,25 +426,40 @@ final class ParserTest extends TestCase
                             array(
                                 new VariableDefinition(
                                     new ValueVariable('devicePicSize'),
-                                    new TypeInt,
+                                    new TypeNamed('Int'),
                                     new ValueString('Default')
                                 ),
                             ),
                             array(),
                             new SelectionSet(
                                 array(
-                                    new SelectionField(null, 'id'),
-                                    new SelectionField(null, 'name'),
                                     new SelectionField(
                                         null,
-                                        'profilePic',
+                                        'user',
                                         array(
                                             new SelectionFieldArgument(
-                                                'size',
-                                                new ValueVariable('devicePicSize')
+                                                'id',
+                                                new ValueInt(4)
+                                            )
+                                        ),
+                                        array(),
+                                        new SelectionSet(
+                                            array(
+                                                new SelectionField(null, 'id'),
+                                                new SelectionField(null, 'name'),
+                                                new SelectionField(
+                                                    null,
+                                                    'profilePic',
+                                                    array(
+                                                        new SelectionFieldArgument(
+                                                            'size',
+                                                            new ValueVariable('devicePicSize')
+                                                        )
+                                                    )
+                                                ),
                                             )
                                         )
-                                    ),
+                                    )
                                 )
                             )
                         ),

@@ -6,8 +6,8 @@ final class TypeCondition
 {
     public $namedType;
 
-    public function __construct($namedType)
+    public function __construct(TypeNamed $namedType)
     {
-        $this->namedType = (string) $namedType;
+        $this->namedType = $namedType;
     }
 }

@@ -274,9 +274,102 @@ final class Parser
             $this->error("Expected a type condition but instead found \"{$tokenNameName}\" with value \"{$on}\"");
         }
 
-        $namedType = $this->expect(Token::T_NAME)->value;
+        $type = $this->parseNamedType();
 
-        return new TypeCondition($namedType);
+        return new TypeCondition($type);
+    }
+
+    private function parseListType()
+    {
+        $this->expect(Token::T_BRACKET_LEFT);
+
+        $types = array();
+        while (true) {
+            if ($this->scanner->eof()) {
+                $this->error('Unclosed bracket');
+            }
+
+            if ($this->accept(Token::T_BRACE_RIGHT)) {
+                break;
+            }
+
+            $types[] = $this->parseType();
+            $this->accept(Token::T_COMMA);
+        }
+
+        return new TypeList($types);
+    }
+
+    private function parseNamedType()
+    {
+        $name = $this->expect(Token::T_NAME)->value;
+        $type = new TypeNamed($name);
+
+        if ($this->accept(Token::T_EXCLAMATION)) {
+            return new TypeNonNull($type);
+        }
+
+        return $type;
+    }
+
+    private function parseType()
+    {
+        if ($this->is(Token::T_BRACKET_LEFT)) {
+            return $this->parseListType();
+        }
+
+        if ($this->is(Token::T_NAME)) {
+            return $this->parseNamedType();
+        }
+
+        $message = 'Expected a type';
+
+        if ($this->scanner->eof()) {
+            $this->error($message . ' but instead reached end');
+        }
+
+        $token = $this->scanner->peek();
+        $this->error($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
+    }
+
+    private function parseVariableDefinition()
+    {
+        $variable = $this->parseVariable();
+        $this->expect(Token::T_COLON);
+        $type = $this->parseType();
+        $defaultValue = null;
+
+        if ($this->accept(Token::T_EQUAL)) {
+            $defaultValue = $this->parseValue();
+        }
+
+        return new VariableDefinition($variable, $type, $defaultValue);
+    }
+
+    private function parseVariableDefinitionList()
+    {
+        $definitions = array();
+
+        if ($this->is(Token::T_PAREN_LEFT) === false) {
+            return $definitions;
+        }
+
+        $this->expect(Token::T_PAREN_LEFT);
+
+        while (true) {
+            if ($this->scanner->eof()) {
+                $this->error('Unclosed parenthesis');
+            }
+
+            if ($this->accept(Token::T_PAREN_RIGHT)) {
+                break;
+            }
+
+            $definitions[] = $this->parseVariableDefinition();
+            $this->accept(Token::T_COMMA);
+        }
+
+        return $definitions;
     }
 
     private function parseDefinition()
@@ -298,17 +391,19 @@ final class Parser
         if ($this->is(Token::T_MUTATION)) {
             $this->expect(Token::T_MUTATION);
             $name = $this->expect(Token::T_NAME)->value;
+            $variables = $this->parseVariableDefinitionList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationMutation($name, array(), array(), $selectionSet);
+            return new OperationMutation($name, $variables, array(), $selectionSet);
         }
 
         if ($this->is(Token::T_SUBSCRIPTION)) {
             $this->expect(Token::T_SUBSCRIPTION);
             $name = $this->expect(Token::T_NAME)->value;
+            $variables = $this->parseVariableDefinitionList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationSubscription($name, array(), array(), $selectionSet);
+            return new OperationSubscription($name, $variables, array(), $selectionSet);
         }
 
         if ($this->is(Token::T_QUERY)) {
@@ -319,9 +414,10 @@ final class Parser
                 $name = $this->expect(Token::T_NAME)->value;
             }
 
+            $variables = $this->parseVariableDefinitionList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationQuery($name, array(), array(), $selectionSet);
+            return new OperationQuery($name, $variables, array(), $selectionSet);
         }
 
         if ($this->is(Token::T_BRACE_LEFT)) {
@@ -330,7 +426,7 @@ final class Parser
             return new OperationQuery(null, array(), array(), $selectionSet);
         }
 
-        $message = 'Expected a query, a query shorthand, a mutation or a subscription';
+        $message = 'Expected a query, a query shorthand, a mutation or a subscription operation';
 
         if ($this->scanner->eof()) {
             $this->error($message . ' but instead reached end');
