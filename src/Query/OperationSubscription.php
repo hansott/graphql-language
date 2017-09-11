@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class OperationSubscription extends OperationBase implements Operation
+final class OperationSubscription extends OperationBase
 {
     public function __construct($name, array $variables = array(), $directives = array(), SelectionSet $selectionSet)
     {

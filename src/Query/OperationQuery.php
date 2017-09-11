@@ -2,6 +2,6 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class OperationQuery extends OperationBase implements Operation
+final class OperationQuery extends OperationBase
 {
 }
