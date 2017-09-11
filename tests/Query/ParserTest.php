@@ -411,6 +411,40 @@ final class ParserTest extends TestCase
                     )
                 )
             ),
+            array(
+                'query getZuckProfile($devicePicSize: Int = "Default") { user(id: 4) { id name profilePic(size: $devicePicSize) } }',
+                new Document(
+                    array(
+                        new OperationQuery(
+                            'getZuckProfile',
+                            array(
+                                new VariableDefinition(
+                                    new ValueVariable('devicePicSize'),
+                                    new TypeInt,
+                                    new ValueString('Default')
+                                ),
+                            ),
+                            array(),
+                            new SelectionSet(
+                                array(
+                                    new SelectionField(null, 'id'),
+                                    new SelectionField(null, 'name'),
+                                    new SelectionField(
+                                        null,
+                                        'profilePic',
+                                        array(
+                                            new SelectionFieldArgument(
+                                                'size',
+                                                new ValueVariable('devicePicSize')
+                                            )
+                                        )
+                                    ),
+                                )
+                            )
+                        ),
+                    )
+                )
+            ),
         );
     }
 }
