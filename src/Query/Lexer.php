@@ -17,11 +17,12 @@ final class Lexer
         $this->tokens[] = new Token($type, $value, $line, $column);
     }
 
-    private function error($message)
+    private function getError($message)
     {
         $line = $this->scanner->getLine();
         $column = $this->scanner->getColumn();
-        throw new SyntaxError($message . " (line {$line}, column {$column})");
+
+        return new SyntaxError($message . " (line {$line}, column {$column})");
     }
 
     private function name()
@@ -78,14 +79,14 @@ final class Lexer
         $next = $this->scanner->peek();
 
         if ($next !== '.') {
-            $this->error("Expected \".\" but instead found \"{$next}\"");
+            throw $this->getError("Expected \".\" but instead found \"{$next}\"");
         }
 
         $points .= $this->scanner->next();
         $next = $this->scanner->peek();
 
         if ($next !== '.') {
-            $this->error("Expected \".\" but instead found \"{$next}\"");
+            throw $this->getError("Expected \".\" but instead found \"{$next}\"");
         }
 
         $points .= $this->scanner->next();
@@ -100,7 +101,7 @@ final class Lexer
 
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed quote');
+                throw $this->getError('Unclosed quote');
             }
             $next = $this->scanner->peek();
             if ($previousChar !== '\\' && $next === '"') {
@@ -120,11 +121,11 @@ final class Lexer
         $number = $this->scanner->next();
         if ($number === '-') {
             if ($this->scanner->eof()) {
-                $this->error('Expected a digit but instead reached end');
+                throw $this->getError('Expected a digit but instead reached end');
             }
             $next = $this->scanner->peek();
             if (ctype_digit($next) === false) {
-                $this->error("Expected a digit but instead found \"{$next}\"");
+                throw $this->getError("Expected a digit but instead found \"{$next}\"");
             }
         }
 
@@ -148,12 +149,12 @@ final class Lexer
         $part = $this->scanner->next();
 
         if ($this->scanner->eof()) {
-            $this->error('Expected a digit but instead reached end');
+            throw $this->getError('Expected a digit but instead reached end');
         }
 
         $next = $this->scanner->peek();
         if (ctype_digit($next) === false) {
-            $this->error("Expected a digit but instead found \"{$next}\"");
+            throw $this->getError("Expected a digit but instead found \"{$next}\"");
         }
 
         $next = $this->scanner->peek();
@@ -170,7 +171,7 @@ final class Lexer
         $part = $this->scanner->next();
 
         if ($this->scanner->eof()) {
-            $this->error('Expected a digit but instead reached end');
+            throw $this->getError('Expected a digit but instead reached end');
         }
 
         $next = $this->scanner->peek();
@@ -180,7 +181,7 @@ final class Lexer
 
         $next = $this->scanner->peek();
         if (ctype_digit($next) === false) {
-            $this->error("Expected a digit but instead found \"{$next}\"");
+            throw $this->getError("Expected a digit but instead found \"{$next}\"");
         }
 
         $next = $this->scanner->peek();
@@ -284,7 +285,7 @@ final class Lexer
                 continue;
             }
 
-            $this->error("Unknown character: \"{$next}\"");
+            throw $this->getError("Unknown character: \"{$next}\"");
         }
 
         return $this->tokens;
