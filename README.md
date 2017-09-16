@@ -9,6 +9,8 @@
 
 This library contains a parser that can parse a GraphQL query into an abstract syntax tree. The parser is able to parse the full [spec](https://facebook.github.io/graphql/).
 
+It's still subject to changes, don't depend on it yet.
+
 ## Install
 
 Via Composer
