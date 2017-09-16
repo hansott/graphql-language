@@ -15,8 +15,12 @@ final class Fragment implements Definition
      * @param Directive[] $directives
      * @param SelectionSet $selectionSet
      */
-    public function __construct($name, TypeCondition $typeCondition, array $directives = array(), SelectionSet $selectionSet)
-    {
+    public function __construct(
+        $name,
+        TypeCondition $typeCondition,
+        array $directives = array(),
+        SelectionSet $selectionSet
+    ) {
         $this->name = (string) $name;
         $this->typeCondition = $typeCondition;
         $this->directives = $directives;

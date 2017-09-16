@@ -17,8 +17,13 @@ final class SelectionField implements Selection
      * @param Directive[] $directives
      * @param SelectionSet|null $selectionSet
      */
-    public function __construct($alias = null, $name, array $arguments = array(), array $directives = array(), SelectionSet $selectionSet = null)
-    {
+    public function __construct(
+        $alias = null,
+        $name,
+        array $arguments = array(),
+        array $directives = array(),
+        SelectionSet $selectionSet = null
+    ) {
         $this->alias = $alias ? (string) $alias : null;
         $this->name = (string) $name;
         $this->arguments = $arguments;

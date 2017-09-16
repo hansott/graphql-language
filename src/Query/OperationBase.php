@@ -15,9 +15,13 @@ abstract class OperationBase implements Operation
      * @param Directive[] $directives
      * @param SelectionSet $selectionSet
      */
-    public function __construct($name = null, array $variables = array(), $directives = array(), SelectionSet $selectionSet)
-    {
-        $this->name = $name;
+    public function __construct(
+        $name = null,
+        array $variables = array(),
+        $directives = array(),
+        SelectionSet $selectionSet
+    ) {
+        $this->name = $name ? (string) $name : null;
         $this->variables = $variables;
         $this->directives = $directives;
         $this->selectionSet = $selectionSet;
