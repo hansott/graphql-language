@@ -67,7 +67,12 @@ final class TraverserTest extends TestCase
 
         $document = new Document(array($query));
 
-        $visitor = $this->createMock('HansOtt\\GraphQL\\Query\\Visitor');
+        $visitor = $this->getMockBuilder('HansOtt\\GraphQL\\Query\\Visitor')
+            ->disableOriginalConstructor()
+            ->disableOriginalClone()
+            ->disableArgumentCloning()
+            ->disallowMockingUnknownTypes()
+            ->getMock();
 
         $visitor
             ->expects($this->once())
