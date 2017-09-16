@@ -10,4 +10,9 @@ final class ValueBoolean implements Value
     {
         $this->isTrue = (bool) $isTrue;
     }
+
+    public function getChildren()
+    {
+        return array();
+    }
 }

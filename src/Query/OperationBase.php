@@ -11,8 +11,8 @@ abstract class OperationBase implements Operation
 
     /**
      * @param string|null $name
-     * @param array $variables
-     * @param array $directives
+     * @param VariableDefinition[] $variables
+     * @param Directive[] $directives
      * @param SelectionSet $selectionSet
      */
     public function __construct($name = null, array $variables = array(), $directives = array(), SelectionSet $selectionSet)
@@ -25,6 +25,18 @@ abstract class OperationBase implements Operation
 
     final public function getChildren()
     {
-        return array($this->selectionSet);
+        $children = array();
+
+        foreach ($this->variables as $variable) {
+            $children[] = $variable;
+        }
+
+        foreach ($this->directives as $directive) {
+            $children[] = $directive;
+        }
+
+        $children[] = $this->selectionSet;
+
+        return $children;
     }
 }

@@ -13,4 +13,9 @@ final class ValueList implements Value
     {
         $this->values = $values;
     }
+
+    public function getChildren()
+    {
+        return $this->values;
+    }
 }

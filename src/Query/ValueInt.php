@@ -10,4 +10,9 @@ final class ValueInt implements Value
     {
         $this->value = (int) $value;
     }
+
+    public function getChildren()
+    {
+        return array();
+    }
 }

@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class Argument implements Node
+final class ValueObjectField implements Node
 {
     public $name;
     public $value;

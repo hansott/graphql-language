@@ -10,4 +10,9 @@ final class TypeNamed implements Type
     {
         $this->name = (string) $name;
     }
+
+    public function getChildren()
+    {
+        return array();
+    }
 }

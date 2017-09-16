@@ -10,4 +10,9 @@ final class ValueString implements Value
     {
         $this->value = (string) $value;
     }
+
+    public function getChildren()
+    {
+        return array();
+    }
 }

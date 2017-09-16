@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class VariableDefinition
+final class VariableDefinition implements Node
 {
     public $variable;
     public $type;
@@ -13,5 +13,10 @@ final class VariableDefinition
         $this->variable = $variable;
         $this->type = $type;
         $this->defaultValue = $defaultValue;
+    }
+
+    public function getChildren()
+    {
+        return array($this->variable, $this->type, $this->defaultValue);
     }
 }

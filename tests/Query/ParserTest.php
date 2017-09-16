@@ -399,11 +399,17 @@ final class ParserTest extends TestCase
                                                         ),
                                                         new ValueObject(
                                                             array(
-                                                                'nestedObject' => new ValueObject(
-                                                                    array(
-                                                                        'nestedObject' => new ValueObject(array()),
+                                                                new ValueObjectField(
+                                                                    'nestedObject',
+                                                                    new ValueObject(
+                                                                        array(
+                                                                            new ValueObjectField(
+                                                                                'nestedObject',
+                                                                                new ValueObject
+                                                                            )
+                                                                        )
                                                                     )
-                                                                )
+                                                                ),
                                                             )
                                                         )
                                                     )

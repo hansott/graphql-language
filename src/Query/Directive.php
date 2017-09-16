@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class Directive
+final class Directive implements Node
 {
     public $name;
     public $arguments;
@@ -15,5 +15,10 @@ final class Directive
     {
         $this->name = (string) $name;
         $this->arguments = $arguments;
+    }
+
+    public function getChildren()
+    {
+        return $this->arguments;
     }
 }

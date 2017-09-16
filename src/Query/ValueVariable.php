@@ -10,4 +10,9 @@ final class ValueVariable implements Value
     {
         $this->name = (string) $name;
     }
+
+    public function getChildren()
+    {
+        return array();
+    }
 }

@@ -13,4 +13,9 @@ final class TypeList implements Type
     {
         $this->types = $types;
     }
+
+    public function getChildren()
+    {
+        return $this->types;
+    }
 }

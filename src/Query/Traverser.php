@@ -2,8 +2,6 @@
 
 namespace HansOtt\GraphQL\Query;
 
-use Exception;
-
 final class Traverser
 {
     private $visitor;
@@ -16,15 +14,8 @@ final class Traverser
     public function traverse(Document $document)
     {
         $this->visitor->beforeTraverse($document);
-
-        $document = $this->traverseNode($document);
-        if (!$document instanceof Document) {
-            throw new Exception('Expected a document but instead found ' . get_class($document));
-        }
-
+        $this->traverseNode($document);
         $this->visitor->afterTraverse($document);
-
-        return $document;
     }
 
     private function traverseNode(Node $node)
@@ -36,8 +27,7 @@ final class Traverser
                 $this->traverseNode($child);
             }
         }
-        $this->visitor->leaveNode($node);
 
-        return $node;
+        $this->visitor->leaveNode($node);
     }
 }

@@ -10,4 +10,9 @@ final class ValueEnum implements Value
     {
         $this->value = (string) $value;
     }
+
+    public function getChildren()
+    {
+        return array();
+    }
 }

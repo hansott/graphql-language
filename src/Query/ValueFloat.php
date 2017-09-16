@@ -10,4 +10,9 @@ final class ValueFloat implements Value
     {
         $this->value = (float) $value;
     }
+
+    public function getChildren()
+    {
+        return array();
+    }
 }

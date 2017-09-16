@@ -2,6 +2,6 @@
 
 namespace HansOtt\GraphQL\Query;
 
-interface Value
+interface Value extends Node
 {
 }

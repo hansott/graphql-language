@@ -10,9 +10,16 @@ final class SelectionField implements Selection
     public $directives;
     public $selectionSet;
 
+    /**
+     * @param string|null $alias
+     * @param string $name
+     * @param Argument[] $arguments
+     * @param Directive[] $directives
+     * @param SelectionSet|null $selectionSet
+     */
     public function __construct($alias = null, $name, array $arguments = array(), array $directives = array(), SelectionSet $selectionSet = null)
     {
-        $this->alias = $alias;
+        $this->alias = $alias ? (string) $alias : null;
         $this->name = (string) $name;
         $this->arguments = $arguments;
         $this->directives = $directives;
@@ -21,6 +28,18 @@ final class SelectionField implements Selection
 
     public function getChildren()
     {
-        return array($this->selectionSet);
+        $children = array();
+
+        foreach ($this->arguments as $variable) {
+            $children[] = $variable;
+        }
+
+        foreach ($this->directives as $directive) {
+            $children[] = $directive;
+        }
+
+        $children[] = $this->selectionSet;
+
+        return $children;
     }
 }

@@ -62,11 +62,11 @@ final class Parser
     private function parseObject()
     {
         $this->expect(Token::T_BRACE_LEFT);
-        $properties = array();
+        $fields = array();
 
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed brace of object');
+                $this->error('Unclosed brace of object value');
             }
 
             if ($this->accept(Token::T_BRACE_RIGHT)) {
@@ -75,11 +75,11 @@ final class Parser
 
             $name = $this->expect(Token::T_NAME)->value;
             $this->expect(Token::T_COLON);
-            $properties[$name] = $this->parseValue();
+            $fields[] = new ValueObjectField($name, $this->parseValue());
             $this->accept(Token::T_COMMA);
         }
 
-        return new ValueObject($properties);
+        return new ValueObject($fields);
     }
 
     private function parseList()
@@ -184,7 +184,7 @@ final class Parser
 
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed brace');
+                $this->error('Unclosed brace of argument list');
             }
 
             if ($this->accept(Token::T_PAREN_RIGHT)) {
@@ -265,7 +265,7 @@ final class Parser
         $selections = array();
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed brace');
+                $this->error('Unclosed brace of selection set');
             }
 
             if ($this->accept(Token::T_BRACE_RIGHT)) {
@@ -298,7 +298,7 @@ final class Parser
         $types = array();
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed bracket');
+                $this->error('Unclosed bracket of list type');
             }
 
             if ($this->accept(Token::T_BRACE_RIGHT)) {
@@ -389,7 +389,7 @@ final class Parser
 
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed parenthesis');
+                $this->error('Unclosed parenthesis of variable definition list');
             }
 
             if ($this->accept(Token::T_PAREN_RIGHT)) {

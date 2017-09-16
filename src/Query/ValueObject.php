@@ -4,13 +4,18 @@ namespace HansOtt\GraphQL\Query;
 
 final class ValueObject implements Value
 {
-    private $properties;
+    public $fields;
 
     /**
-     * @param Value[] $properties
+     * @param ValueObjectField[] $fields
      */
-    public function __construct(array $properties)
+    public function __construct(array $fields = array())
     {
-        $this->properties = $properties;
+        $this->fields = $fields;
+    }
+
+    public function getChildren()
+    {
+        return $this->fields;
     }
 }

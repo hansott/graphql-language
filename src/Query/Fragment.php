@@ -9,6 +9,12 @@ final class Fragment implements Definition
     public $directives;
     public $selectionSet;
 
+    /**
+     * @param string $name
+     * @param TypeCondition $typeCondition
+     * @param Directive[] $directives
+     * @param SelectionSet $selectionSet
+     */
     public function __construct($name, TypeCondition $typeCondition, array $directives = array(), SelectionSet $selectionSet)
     {
         $this->name = (string) $name;
@@ -19,6 +25,14 @@ final class Fragment implements Definition
 
     public function getChildren()
     {
-        return array($this->selectionSet);
+        $children = array($this->typeCondition);
+
+        foreach ($this->directives as $directive) {
+            $children[] = $directive;
+        }
+
+        $children[] = $this->selectionSet;
+
+        return $children;
     }
 }

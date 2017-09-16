@@ -10,4 +10,9 @@ final class TypeNonNull implements Type
     {
         $this->type = $type;
     }
+
+    public function getChildren()
+    {
+        return array($this->type);
+    }
 }
