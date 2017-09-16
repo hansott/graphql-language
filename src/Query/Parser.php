@@ -15,14 +15,14 @@ final class Parser
         $this->lexer = $lexer;
     }
 
-    private function error($message)
+    private function getParseError($message)
     {
         $token = $this->scanner->getLastToken();
         if ($this->scanner->eof() === false) {
             $token = $this->scanner->peek();
         }
 
-        throw new ParseError($message . " (line {$token->line}, column {$token->column})");
+        return new ParseError($message . " (line {$token->line}, column {$token->column})");
     }
 
     private function expect($tokenType)
@@ -31,7 +31,7 @@ final class Parser
 
         if ($token->type !== $tokenType) {
             $expectedToken = Token::getNameFor($tokenType);
-            $this->error("Expected \"{$expectedToken}\" but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
+            throw $this->getParseError("Expected \"{$expectedToken}\" but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
         }
 
         return $token;
@@ -66,7 +66,7 @@ final class Parser
 
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed brace of object value');
+                throw $this->getParseError('Unclosed brace of object value');
             }
 
             if ($this->accept(Token::T_BRACE_RIGHT)) {
@@ -89,7 +89,7 @@ final class Parser
 
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed bracket of list');
+                throw $this->getParseError('Unclosed bracket of list');
             }
 
             if ($this->accept(Token::T_BRACKET_RIGHT)) {
@@ -156,11 +156,11 @@ final class Parser
         $message = 'Expected a value';
 
         if ($this->scanner->eof()) {
-            $this->error($message . ' but instead reached end');
+            throw $this->getParseError($message . ' but instead reached end');
         }
 
         $token = $this->scanner->peek();
-        $this->error($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
+        throw $this->getParseError($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
     }
 
     private function parseArgument()
@@ -184,7 +184,7 @@ final class Parser
 
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed brace of argument list');
+                throw $this->getParseError('Unclosed brace of argument list');
             }
 
             if ($this->accept(Token::T_PAREN_RIGHT)) {
@@ -251,11 +251,11 @@ final class Parser
         $message = 'Expected a field, a fragment spread or an inline fragment';
 
         if ($this->scanner->eof()) {
-            $this->error($message . ' but instead reached end');
+            throw $this->getParseError($message . ' but instead reached end');
         }
 
         $token = $this->scanner->peek();
-        $this->error($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
+        throw $this->getParseError($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
     }
 
     private function parseSelectionSet()
@@ -265,7 +265,7 @@ final class Parser
         $selections = array();
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed brace of selection set');
+                throw $this->getParseError('Unclosed brace of selection set');
             }
 
             if ($this->accept(Token::T_BRACE_RIGHT)) {
@@ -283,7 +283,7 @@ final class Parser
         $on = $this->expect(Token::T_NAME)->value;
         if ($on !== 'on') {
             $tokenNameName = Token::getNameFor(Token::T_NAME);
-            $this->error("Expected a type condition but instead found \"{$tokenNameName}\" with value \"{$on}\"");
+            throw $this->getParseError("Expected a type condition but instead found \"{$tokenNameName}\" with value \"{$on}\"");
         }
 
         $type = $this->parseNamedType();
@@ -298,7 +298,7 @@ final class Parser
         $types = array();
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed bracket of list type');
+                throw $this->getParseError('Unclosed bracket of list type');
             }
 
             if ($this->accept(Token::T_BRACE_RIGHT)) {
@@ -337,11 +337,11 @@ final class Parser
         $message = 'Expected a type';
 
         if ($this->scanner->eof()) {
-            $this->error($message . ' but instead reached end');
+            throw $this->getParseError($message . ' but instead reached end');
         }
 
         $token = $this->scanner->peek();
-        $this->error($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
+        throw $this->getParseError($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
     }
 
     private function parseDirective()
@@ -389,7 +389,7 @@ final class Parser
 
         while (true) {
             if ($this->scanner->eof()) {
-                $this->error('Unclosed parenthesis of variable definition list');
+                throw $this->getParseError('Unclosed parenthesis of variable definition list');
             }
 
             if ($this->accept(Token::T_PAREN_RIGHT)) {
@@ -410,7 +410,7 @@ final class Parser
 
             $name = $this->expect(Token::T_NAME)->value;
             if ($name === 'on') {
-                $this->error('A fragment cannot be named "on"');
+                throw $this->getParseError('A fragment cannot be named "on"');
             }
 
             $typeCondition = $this->parseTypeCondition();
@@ -464,11 +464,11 @@ final class Parser
         $message = 'Expected a query, a query shorthand, a mutation or a subscription operation';
 
         if ($this->scanner->eof()) {
-            $this->error($message . ' but instead reached end');
+            throw $this->getParseError($message . ' but instead reached end');
         }
 
         $token = $this->scanner->peek();
-        $this->error($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
+        throw $this->getParseError($message . " but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
     }
 
     private function parseDocument()
