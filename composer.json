@@ -1,7 +1,7 @@
 {
     "name": "hansott/graphql-language",
     "type": "library",
-    "description": "Library to deal with the GraphQL language",
+    "description": "A GraphQL parser written in PHP",
     "keywords": [
         "hansott",
         "graphql",
