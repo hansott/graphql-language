@@ -61,7 +61,7 @@ final class Parser
 
     private function parseObject()
     {
-        $this->expect(Token::T_BRACE_LEFT);
+        $location = $this->expect(Token::T_BRACE_LEFT)->location;
         $fields = array();
 
         while (true) {
@@ -73,18 +73,18 @@ final class Parser
                 break;
             }
 
-            $name = $this->expect(Token::T_NAME)->value;
+            $nameToken = $this->expect(Token::T_NAME);
             $this->expect(Token::T_COLON);
-            $fields[] = new ValueObjectField($name, $this->parseValue());
+            $fields[] = new ValueObjectField($nameToken->value, $this->parseValue(), $nameToken->location);
             $this->accept(Token::T_COMMA);
         }
 
-        return new ValueObject($fields);
+        return new ValueObject($fields, $location);
     }
 
     private function parseList()
     {
-        $this->expect(Token::T_BRACKET_LEFT);
+        $location = $this->expect(Token::T_BRACKET_LEFT)->location;
         $items = array();
 
         while (true) {
@@ -100,15 +100,15 @@ final class Parser
             $this->accept(Token::T_COMMA);
         }
 
-        return new ValueList($items);
+        return new ValueList($items, $location);
     }
 
     private function parseVariable()
     {
-        $this->expect(Token::T_DOLLAR);
+        $location = $this->expect(Token::T_DOLLAR)->location;
         $name = $this->expect(Token::T_NAME)->value;
 
-        return new ValueVariable($name);
+        return new ValueVariable($name, $location);
     }
 
     private function parseValue()
@@ -118,31 +118,31 @@ final class Parser
         }
 
         if ($string = $this->accept(Token::T_STRING)) {
-            return new ValueString($string->value);
+            return new ValueString($string->value, $string->location);
         }
 
-        if ($this->accept(Token::T_TRUE)) {
-            return new ValueBoolean(true);
+        if ($true = $this->accept(Token::T_TRUE)) {
+            return new ValueBoolean(true, $true->location);
         }
 
-        if ($this->accept(Token::T_FALSE)) {
-            return new ValueBoolean(false);
+        if ($false = $this->accept(Token::T_FALSE)) {
+            return new ValueBoolean(false, $false->location);
         }
 
-        if ($this->accept(Token::T_NULL)) {
-            return new ValueNull;
+        if ($null = $this->accept(Token::T_NULL)) {
+            return new ValueNull($null->location);
         }
 
         if ($int = $this->accept(Token::T_INT)) {
-            return new ValueInt($int->value);
+            return new ValueInt($int->value, $int->location);
         }
 
         if ($float = $this->accept(Token::T_FLOAT)) {
-            return new ValueFloat($float->value);
+            return new ValueFloat($float->value, $float->location);
         }
 
         if ($name = $this->accept(Token::T_NAME)) {
-            return new ValueEnum($name->value);
+            return new ValueEnum($name->value, $name->location);
         }
 
         if ($this->is(Token::T_BRACKET_LEFT)) {
@@ -165,11 +165,11 @@ final class Parser
 
     private function parseArgument()
     {
-        $name = $this->expect(Token::T_NAME)->value;
+        $nameToken = $this->expect(Token::T_NAME);
         $this->expect(Token::T_COLON);
         $value = $this->parseValue();
 
-        return new Argument($name, $value);
+        return new Argument($nameToken->value, $value, $nameToken->location);
     }
 
     private function parseArgumentList()
@@ -200,7 +200,8 @@ final class Parser
 
     private function parseField()
     {
-        $name = $this->expect(Token::T_NAME)->value;
+        $nameToken = $this->expect(Token::T_NAME);
+        $name = $nameToken->value;
 
         $alias = null;
         if ($this->is(Token::T_COLON)) {
@@ -218,16 +219,16 @@ final class Parser
             $selectionSet = $this->parseSelectionSet();
         }
 
-        return new SelectionField($alias, $name, $arguments, $directives, $selectionSet);
+        return new SelectionField($alias, $name, $arguments, $directives, $selectionSet, $nameToken->location);
     }
 
     private function parseFragment()
     {
-        $this->expect(Token::T_SPREAD);
+        $location = $this->expect(Token::T_SPREAD)->location;
         $fragmentName = $this->expect(Token::T_NAME)->value;
 
         if ($fragmentName !== 'on') {
-            return new SelectionFragmentSpread($fragmentName);
+            return new SelectionFragmentSpread($fragmentName, $location);
         }
 
         $this->scanner->back();
@@ -235,7 +236,7 @@ final class Parser
         $directives = $this->parseDirectiveList();
         $selectionSet = $this->parseSelectionSet();
 
-        return new SelectionInlineFragment($typeCondition, $directives, $selectionSet);
+        return new SelectionInlineFragment($typeCondition, $directives, $selectionSet, $location);
     }
 
     private function parseSelection()
@@ -260,8 +261,9 @@ final class Parser
 
     private function parseSelectionSet()
     {
-        $this->expect(Token::T_BRACE_LEFT);
+        $location = $this->expect(Token::T_BRACE_LEFT)->location;
 
+        /** @var Selection[] $selections */
         $selections = array();
         while (true) {
             if ($this->scanner->eof()) {
@@ -275,12 +277,13 @@ final class Parser
             $selections[] = $this->parseSelection();
         }
 
-        return new SelectionSet($selections);
+        return new SelectionSet($selections, $location);
     }
 
     private function parseTypeCondition()
     {
-        $on = $this->expect(Token::T_NAME)->value;
+        $nameToken = $this->expect(Token::T_NAME);
+        $on = $nameToken->value;
         if ($on !== 'on') {
             $tokenNameName = Token::getNameFor(Token::T_NAME);
             throw $this->getParseError("Expected a type condition but instead found \"{$tokenNameName}\" with value \"{$on}\"");
@@ -288,12 +291,12 @@ final class Parser
 
         $type = $this->parseNamedType();
 
-        return new TypeCondition($type);
+        return new TypeCondition($type, $nameToken->location);
     }
 
     private function parseListType()
     {
-        $this->expect(Token::T_BRACKET_LEFT);
+        $location = $this->expect(Token::T_BRACKET_LEFT)->location;
 
         $types = array();
         while (true) {
@@ -309,16 +312,16 @@ final class Parser
             $this->accept(Token::T_COMMA);
         }
 
-        return new TypeList($types);
+        return new TypeList($types, $location);
     }
 
     private function parseNamedType()
     {
-        $name = $this->expect(Token::T_NAME)->value;
-        $type = new TypeNamed($name);
+        $nameToken = $this->expect(Token::T_NAME);
+        $type = new TypeNamed($nameToken->value, $nameToken->location);
 
         if ($this->accept(Token::T_EXCLAMATION)) {
-            return new TypeNonNull($type);
+            return new TypeNonNull($type, $type->location);
         }
 
         return $type;
@@ -346,11 +349,11 @@ final class Parser
 
     private function parseDirective()
     {
-        $this->expect(Token::T_AT);
+        $location = $this->expect(Token::T_AT)->location;
         $name = $this->expect(Token::T_NAME)->value;
         $arguments = $this->parseArgumentList();
 
-        return new Directive($name, $arguments);
+        return new Directive($name, $arguments, $location);
     }
 
     private function parseDirectiveList()
@@ -374,7 +377,7 @@ final class Parser
             $defaultValue = $this->parseValue();
         }
 
-        return new VariableDefinition($variable, $type, $defaultValue);
+        return new VariableDefinition($variable, $type, $defaultValue, $variable->location);
     }
 
     private function parseVariableDefinitionList()
@@ -406,7 +409,7 @@ final class Parser
     private function parseDefinition()
     {
         if ($this->is(Token::T_FRAGMENT)) {
-            $this->expect(Token::T_FRAGMENT);
+            $location = $this->expect(Token::T_FRAGMENT)->location;
 
             $name = $this->expect(Token::T_NAME)->value;
             if ($name === 'on') {
@@ -417,31 +420,31 @@ final class Parser
             $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new Fragment($name, $typeCondition, $directives, $selectionSet);
+            return new Fragment($name, $typeCondition, $directives, $selectionSet, $location);
         }
 
         if ($this->is(Token::T_MUTATION)) {
-            $this->expect(Token::T_MUTATION);
+            $location = $this->expect(Token::T_MUTATION)->location;
             $name = $this->expect(Token::T_NAME)->value;
             $variables = $this->parseVariableDefinitionList();
             $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationMutation($name, $variables, $directives, $selectionSet);
+            return new OperationMutation($name, $variables, $directives, $selectionSet, $location);
         }
 
         if ($this->is(Token::T_SUBSCRIPTION)) {
-            $this->expect(Token::T_SUBSCRIPTION);
+            $location = $this->expect(Token::T_SUBSCRIPTION)->location;
             $name = $this->expect(Token::T_NAME)->value;
             $variables = $this->parseVariableDefinitionList();
             $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationSubscription($name, $variables, $directives, $selectionSet);
+            return new OperationSubscription($name, $variables, $directives, $selectionSet, $location);
         }
 
         if ($this->is(Token::T_QUERY)) {
-            $this->expect(Token::T_QUERY);
+            $location = $this->expect(Token::T_QUERY)->location;
 
             $name = null;
             if ($this->is(Token::T_NAME)) {
@@ -452,13 +455,13 @@ final class Parser
             $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationQuery($name, $variables, $directives, $selectionSet);
+            return new OperationQuery($name, $variables, $directives, $selectionSet, $location);
         }
 
         if ($this->is(Token::T_BRACE_LEFT)) {
             $selectionSet = $this->parseSelectionSet();
 
-            return new OperationQuery(null, array(), array(), $selectionSet);
+            return new OperationQuery(null, array(), array(), $selectionSet, $selectionSet->location);
         }
 
         $message = 'Expected a query, a query shorthand, a mutation or a subscription operation';
@@ -473,6 +476,7 @@ final class Parser
 
     private function parseDocument()
     {
+        /** @var Definition[] $definitions */
         $definitions = array();
         while ($this->scanner->eof() === false) {
             $definitions[] = $this->parseDefinition();
@@ -486,7 +490,8 @@ final class Parser
         $tokens = $this->lexer->lex($query);
         $scanner = new ScannerGeneric($tokens);
         $this->scanner = new ScannerTokens($scanner);
+        $document = $this->parseDocument();
 
-        return $this->parseDocument();
+        return $document;
     }
 }

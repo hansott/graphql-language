@@ -10,4 +10,9 @@ abstract class NodeBase implements Node
     {
         $this->location = $location;
     }
+
+    public function getLocation()
+    {
+        return $this->location;
+    }
 }

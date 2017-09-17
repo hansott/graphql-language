@@ -8,7 +8,8 @@ final class ScannerWithLocation implements Scanner
 {
     private $scanner;
     private $line = 1;
-    private $column = 1;
+    private $column = 0;
+    private $nextCalledOnce = false;
 
     public function __construct(Scanner $scanner)
     {
@@ -22,6 +23,10 @@ final class ScannerWithLocation implements Scanner
 
     public function getColumn()
     {
+        if ($this->nextCalledOnce === false) {
+            return 1;
+        }
+
         return $this->column;
     }
 
@@ -33,6 +38,7 @@ final class ScannerWithLocation implements Scanner
     public function next()
     {
         $current = $this->scanner->next();
+        $this->nextCalledOnce = true;
         if ($current === "\n" || $current === "\r") {
             $this->line++;
             $this->column = 1;

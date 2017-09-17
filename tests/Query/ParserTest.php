@@ -98,9 +98,18 @@ final class ParserTest extends TestCase
                             array(),
                             new SelectionSet(
                                 array(
-                                    new SelectionField(null, 'author'),
-                                )
-                            )
+                                    new SelectionField(
+                                        null,
+                                        'author',
+                                        array(),
+                                        array(),
+                                        null,
+                                        new Location(1, 3)
+                                    ),
+                                ),
+                                new Location(1, 1)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -122,12 +131,23 @@ final class ParserTest extends TestCase
                                         array(),
                                         new SelectionSet(
                                             array(
-                                                new SelectionField(null, 'name'),
-                                            )
-                                        )
+                                                new SelectionField(
+                                                    null,
+                                                    'name',
+                                                    array(),
+                                                    array(),
+                                                    null,
+                                                    new Location(1, 12)
+                                                ),
+                                            ),
+                                            new Location(1, 10)
+                                        ),
+                                        new Location(1, 3)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 1)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -149,12 +169,23 @@ final class ParserTest extends TestCase
                                         array(),
                                         new SelectionSet(
                                             array(
-                                                new SelectionField(null, 'name'),
-                                            )
-                                        )
+                                                new SelectionField(
+                                                    null,
+                                                    'name',
+                                                    array(),
+                                                    array(),
+                                                    null,
+                                                    new Location(1, 14)
+                                                ),
+                                            ),
+                                            new Location(1, 12)
+                                        ),
+                                        new Location(1, 3)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 1)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -173,11 +204,20 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new Argument('id', new ValueInt(1)),
-                                        )
+                                            new Argument(
+                                                'id',
+                                                new ValueInt(1, new Location(1, 14)),
+                                                new Location(1, 10)
+                                            ),
+                                        ),
+                                        array(),
+                                        null,
+                                        new Location(1, 3)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 1)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -196,12 +236,25 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new Argument('id', new ValueInt(1)),
-                                            new Argument('name', new ValueString("Hans Ott")),
-                                        )
+                                            new Argument(
+                                                'id',
+                                                new ValueInt(1, new Location(1, 14)),
+                                                new Location(1, 10)
+                                            ),
+                                            new Argument(
+                                                'name',
+                                                new ValueString("Hans Ott", new Location(1, 23)),
+                                                new Location(1, 17)
+                                            ),
+                                        ),
+                                        array(),
+                                        null,
+                                        new Location(1, 3)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 1)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -220,12 +273,25 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new Argument('id', new ValueInt(1)),
-                                            new Argument('name', new ValueString("Hans Ott")),
-                                        )
+                                            new Argument(
+                                                'id',
+                                                new ValueInt(1, new Location(1, 20)),
+                                                new Location(1, 16)
+                                            ),
+                                            new Argument(
+                                                'name',
+                                                new ValueString("Hans Ott", new Location(1, 29)),
+                                                new Location(1, 23)
+                                            ),
+                                        ),
+                                        array(),
+                                        null,
+                                        new Location(1, 9)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 7)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -244,12 +310,25 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new Argument('id', new ValueInt(1)),
-                                            new Argument('name', new ValueString("Hans Ott")),
-                                        )
+                                            new Argument(
+                                                'id',
+                                                new ValueInt(1, new Location(1, 25)),
+                                                new Location(1, 21)
+                                            ),
+                                            new Argument(
+                                                'name',
+                                                new ValueString("Hans Ott", new Location(1, 34)),
+                                                new Location(1, 28)
+                                            ),
+                                        ),
+                                        array(),
+                                        null,
+                                        new Location(1, 14)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 12)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -272,24 +351,41 @@ final class ParserTest extends TestCase
                                         array(),
                                         new SelectionSet(
                                             array(
-                                                new SelectionFragmentSpread('authorFragment'),
-                                            )
-                                        )
+                                                new SelectionFragmentSpread(
+                                                    'authorFragment',
+                                                    new Location(1, 12)
+                                                ),
+                                            ),
+                                            new Location(1, 10)
+                                        ),
+                                        new Location(1, 3)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 1)
+                            ),
+                            new Location(1, 1)
                         ),
                         new Fragment(
                             'authorFragment',
                             new TypeCondition(
-                                new TypeNamed('Author')
+                                new TypeNamed('Author', new Location(1, 61)),
+                                new Location(1, 58)
                             ),
                             array(),
                             new SelectionSet(
                                 array(
-                                    new SelectionField(null, 'name'),
-                                )
-                            )
+                                    new SelectionField(
+                                        null,
+                                        'name',
+                                        array(),
+                                        array(),
+                                        null,
+                                        new Location(1, 70)
+                                    ),
+                                ),
+                                new Location(1, 68)
+                            ),
+                            new Location(1, 34)
                         )
                     )
                 )
@@ -311,34 +407,65 @@ final class ParserTest extends TestCase
                                         array(),
                                         new SelectionSet(
                                             array(
-                                                new SelectionField(null, 'name'),
+                                                new SelectionField(
+                                                    null,
+                                                    'name',
+                                                    array(),
+                                                    array(),
+                                                    null,
+                                                    new Location(1, 12)
+                                                ),
                                                 new SelectionInlineFragment(
                                                     new TypeCondition(
-                                                        new TypeNamed('Page')
+                                                        new TypeNamed('Page', new Location(1, 24)),
+                                                        new Location(1, 21)
                                                     ),
                                                     array(),
                                                     new SelectionSet(
                                                         array(
-                                                            new SelectionField(null, 'likes'),
-                                                        )
-                                                    )
+                                                            new SelectionField(
+                                                                null,
+                                                                'likes',
+                                                                array(),
+                                                                array(),
+                                                                null,
+                                                                new Location(1, 31)
+                                                            ),
+                                                        ),
+                                                        new Location(1, 29)
+                                                    ),
+                                                    new Location(1, 17)
                                                 ),
                                                 new SelectionInlineFragment(
                                                     new TypeCondition(
-                                                        new TypeNamed('User')
+                                                        new TypeNamed('User', new Location(1, 46)),
+                                                        new Location(1, 43)
                                                     ),
                                                     array(),
                                                     new SelectionSet(
                                                         array(
-                                                            new SelectionField(null, 'email'),
-                                                        )
-                                                    )
+                                                            new SelectionField(
+                                                                null,
+                                                                'email',
+                                                                array(),
+                                                                array(),
+                                                                null,
+                                                                new Location(1, 53)
+                                                            ),
+                                                        ),
+                                                        new Location(1, 51)
+                                                    ),
+                                                    new Location(1, 39)
                                                 ),
-                                            )
-                                        )
+                                            ),
+                                            new Location(1, 10)
+                                        ),
+                                        new Location(1, 3)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 1)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -357,11 +484,20 @@ final class ParserTest extends TestCase
                                         null,
                                         'author',
                                         array(
-                                            new Argument('name', new ValueString("\" \n \t \r 😀")),
-                                        )
+                                            new Argument(
+                                                'name',
+                                                new ValueString("\" \n \t \r 😀", new Location(1, 16)),
+                                                new Location(1, 10)
+                                            ),
+                                        ),
+                                        array(),
+                                        null,
+                                        new Location(1, 3)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 1)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -384,18 +520,22 @@ final class ParserTest extends TestCase
                                                 'id',
                                                 new ValueList(
                                                     array(
-                                                        new ValueInt(1),
-                                                        new ValueVariable('name'),
-                                                        new ValueEnum('PUBLISHED'),
-                                                        new ValueString('string'),
-                                                        new ValueFloat(1.0),
-                                                        new ValueNull,
-                                                        new ValueBoolean(true),
-                                                        new ValueBoolean(false),
+                                                        new ValueInt(1, new Location(1, 15)),
+                                                        new ValueVariable('name', new Location(1, 18)),
+                                                        new ValueEnum('PUBLISHED', new Location(1, 25)),
+                                                        new ValueString('string', new Location(1, 36)),
+                                                        new ValueFloat(1.0, new Location(1, 46)),
+                                                        new ValueNull(new Location(1, 51)),
+                                                        new ValueBoolean(true, new Location(1, 57)),
+                                                        new ValueBoolean(false, new Location(1, 63)),
                                                         new ValueList(
                                                             array(
-                                                                new ValueString('nested list'),
-                                                            )
+                                                                new ValueString(
+                                                                    'nested list',
+                                                                    new Location(1, 71)
+                                                                ),
+                                                            ),
+                                                            new Location(1, 70)
                                                         ),
                                                         new ValueObject(
                                                             array(
@@ -405,20 +545,34 @@ final class ParserTest extends TestCase
                                                                         array(
                                                                             new ValueObjectField(
                                                                                 'nestedObject',
-                                                                                new ValueObject
+                                                                                new ValueObject(
+                                                                                    array(),
+                                                                                    new Location(1, 119)
+                                                                                ),
+                                                                                new Location(1, 105)
                                                                             )
-                                                                        )
-                                                                    )
+                                                                        ),
+                                                                        new Location(1, 103)
+                                                                    ),
+                                                                    new Location(1, 89)
                                                                 ),
-                                                            )
+                                                            ),
+                                                            new Location(1, 87)
                                                         )
-                                                    )
-                                                )
+                                                    ),
+                                                    new Location(1, 14)
+                                                ),
+                                                new Location(1, 10)
                                             ),
-                                        )
+                                        ),
+                                        array(),
+                                        null,
+                                        new Location(1, 3)
                                     ),
-                                )
-                            )
+                                ),
+                                new Location(1, 1)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -431,9 +585,10 @@ final class ParserTest extends TestCase
                             'getZuckProfile',
                             array(
                                 new VariableDefinition(
-                                    new ValueVariable('devicePicSize'),
-                                    new TypeNamed('Int'),
-                                    new ValueString('Default')
+                                    new ValueVariable('devicePicSize', new Location(1, 22)),
+                                    new TypeNamed('Int', new Location(1, 38)),
+                                    new ValueString('Default', new Location(1, 44)),
+                                    new Location(1, 22)
                                 ),
                             ),
                             array(),
@@ -445,29 +600,55 @@ final class ParserTest extends TestCase
                                         array(
                                             new Argument(
                                                 'id',
-                                                new ValueInt(4)
+                                                new ValueInt(4, new Location(1, 66)),
+                                                new Location(1, 62)
                                             )
                                         ),
                                         array(),
                                         new SelectionSet(
                                             array(
-                                                new SelectionField(null, 'id'),
-                                                new SelectionField(null, 'name'),
+                                                new SelectionField(
+                                                    null,
+                                                    'id',
+                                                    array(),
+                                                    array(),
+                                                    null,
+                                                    new Location(1, 71)
+                                                ),
+                                                new SelectionField(
+                                                    null,
+                                                    'name',
+                                                    array(),
+                                                    array(),
+                                                    null,
+                                                    new Location(1, 74)
+                                                ),
                                                 new SelectionField(
                                                     null,
                                                     'profilePic',
                                                     array(
                                                         new Argument(
                                                             'size',
-                                                            new ValueVariable('devicePicSize')
+                                                            new ValueVariable(
+                                                                'devicePicSize',
+                                                                new Location(1, 96)
+                                                            ),
+                                                            new Location(1, 90)
                                                         )
-                                                    )
+                                                    ),
+                                                    array(),
+                                                    null,
+                                                    new Location(1, 79)
                                                 ),
-                                            )
-                                        )
+                                            ),
+                                            new Location(1, 69)
+                                        ),
+                                        new Location(1, 57)
                                     )
-                                )
-                            )
+                                ),
+                                new Location(1, 55)
+                            ),
+                            new Location(1, 1)
                         ),
                     )
                 )
@@ -480,8 +661,10 @@ final class ParserTest extends TestCase
                             'myQuery',
                             array(
                                 new VariableDefinition(
-                                    new ValueVariable('someTest'),
-                                    new TypeNamed('Boolean')
+                                    new ValueVariable('someTest', new Location(1, 15)),
+                                    new TypeNamed('Boolean', new Location(1, 26)),
+                                    null,
+                                    new Location(1, 15)
                                 ),
                             ),
                             array(),
@@ -495,13 +678,22 @@ final class ParserTest extends TestCase
                                             new Directive(
                                                 'skip',
                                                 array(
-                                                    new Argument('if', new ValueVariable('someTest')),
-                                                )
-                                            )
-                                        )
+                                                    new Argument(
+                                                        'if',
+                                                        new ValueVariable('someTest', new Location(1, 72)),
+                                                        new Location(1, 68)
+                                                    ),
+                                                ),
+                                                new Location(1, 62)
+                                            ),
+                                        ),
+                                        null,
+                                        new Location(1, 37)
                                     )
-                                )
-                            )
+                                ),
+                                new Location(1, 35)
+                            ),
+                            new Location(1, 1)
                         )
                     )
                 )
@@ -514,14 +706,19 @@ final class ParserTest extends TestCase
                             'Hero',
                             array(
                                 new VariableDefinition(
-                                    new ValueVariable('episode'),
-                                    new TypeNamed('Episode')
+                                    new ValueVariable('episode', new Location(1, 12)),
+                                    new TypeNamed('Episode', new Location(1, 22)),
+                                    null,
+                                    new Location(1, 12)
                                 ),
                                 new VariableDefinition(
-                                    new ValueVariable('withFriends'),
+                                    new ValueVariable('withFriends', new Location(1, 31)),
                                     new TypeNonNull(
-                                        new TypeNamed('Boolean')
-                                    )
+                                        new TypeNamed('Boolean', new Location(1, 45)),
+                                        new Location(1, 45)
+                                    ),
+                                    null,
+                                    new Location(1, 31)
                                 ),
                             ),
                             array(),
@@ -531,12 +728,23 @@ final class ParserTest extends TestCase
                                         null,
                                         'hero',
                                         array(
-                                            new Argument('episode', new ValueVariable('episode')),
+                                            new Argument(
+                                                'episode',
+                                                new ValueVariable('episode', new Location(1, 71)),
+                                                new Location(1, 62)
+                                            ),
                                         ),
                                         array(),
                                         new SelectionSet(
                                             array(
-                                                new SelectionField(null, 'name'),
+                                                new SelectionField(
+                                                    null,
+                                                    'name',
+                                                    array(),
+                                                    array(),
+                                                    null,
+                                                    new Location(1, 83)
+                                                ),
                                                 new SelectionField(
                                                     null,
                                                     'friends',
@@ -545,21 +753,39 @@ final class ParserTest extends TestCase
                                                         new Directive(
                                                             'include',
                                                             array(
-                                                                new Argument('if', new ValueVariable('withFriends')),
-                                                            )
+                                                                new Argument(
+                                                                    'if',
+                                                                    new ValueVariable('withFriends', new Location(1, 109)),
+                                                                    new Location(1, 105)
+                                                                ),
+                                                            ),
+                                                            new Location(1, 96)
                                                         ),
                                                     ),
                                                     new SelectionSet(
                                                         array(
-                                                            new SelectionField(null, 'name'),
-                                                        )
-                                                    )
+                                                            new SelectionField(
+                                                                null,
+                                                                'name',
+                                                                array(),
+                                                                array(),
+                                                                null,
+                                                                new Location(1, 125)
+                                                            ),
+                                                        ),
+                                                        new Location(1, 123)
+                                                    ),
+                                                    new Location(1, 88)
                                                 )
-                                            )
-                                        )
+                                            ),
+                                            new Location(1, 81)
+                                        ),
+                                        new Location(1, 57)
                                     )
-                                )
-                            )
+                                ),
+                                new Location(1, 55)
+                            ),
+                            new Location(1, 1)
                         )
                     )
                 )

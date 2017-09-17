@@ -10,12 +10,17 @@ final class Lexer
     private $scanner;
     private $tokens;
 
-    private function emit($type, $value)
+    private function emit($type, $value, $location)
+    {
+        $this->tokens[] = new Token($type, $value, $location);
+    }
+
+    private function getLocation()
     {
         $line = $this->scanner->getLine();
         $column = $this->scanner->getColumn();
-        $location = new Location($line, $column);
-        $this->tokens[] = new Token($type, $value, $location);
+
+        return new Location($line, $column);
     }
 
     private function getError($message)
@@ -29,9 +34,10 @@ final class Lexer
     private function name()
     {
         $name = $this->scanner->next();
+        $location = $this->getLocation();
 
         if ($this->scanner->eof()) {
-            $this->emit(Token::T_NAME, $name);
+            $this->emit(Token::T_NAME, $name, $location);
             return;
         }
 
@@ -61,7 +67,7 @@ final class Lexer
             $type = Token::T_NULL;
         }
 
-        $this->emit($type, $name);
+        $this->emit($type, $name, $location);
     }
 
     private function comment()
@@ -77,6 +83,7 @@ final class Lexer
     private function spread()
     {
         $points = $this->scanner->next();
+        $location = $this->getLocation();
         $next = $this->scanner->peek();
 
         if ($next !== '.') {
@@ -91,12 +98,13 @@ final class Lexer
         }
 
         $points .= $this->scanner->next();
-        $this->emit(Token::T_SPREAD, $points);
+        $this->emit(Token::T_SPREAD, $points, $location);
     }
 
     private function str()
     {
         $this->scanner->next();
+        $location = $this->getLocation();
         $string = '';
         $previousChar = false;
 
@@ -114,12 +122,13 @@ final class Lexer
         }
 
         $string = json_decode('"' . $string . '"');
-        $this->emit(Token::T_STRING, $string);
+        $this->emit(Token::T_STRING, $string, $location);
     }
 
     private function integerPart()
     {
         $number = $this->scanner->next();
+        $location = $this->getLocation();
         if ($number === '-') {
             if ($this->scanner->eof()) {
                 throw $this->getError('Expected a digit but instead reached end');
@@ -133,7 +142,7 @@ final class Lexer
         $next = $this->scanner->peek();
         if ($next === '0') {
             $number .= $this->scanner->next();
-            return $number;
+            return array($number, $location);
         }
 
         $next = $this->scanner->peek();
@@ -142,7 +151,7 @@ final class Lexer
             $next = $this->scanner->peek();
         }
 
-        return $number;
+        return array($number, $location);
     }
 
     private function fractionalPart()
@@ -196,15 +205,15 @@ final class Lexer
 
     private function number()
     {
-        $integerPart = $this->integerPart();
+        list ($integerPart, $location) = $this->integerPart();
         if ($this->scanner->eof()) {
-            $this->emit(Token::T_INT, $integerPart);
+            $this->emit(Token::T_INT, $integerPart, $location);
             return;
         }
 
         $next = $this->scanner->peek();
         if ($next !== '.' && $next !== 'e' && $next !== 'E') {
-            $this->emit(Token::T_INT, $integerPart);
+            $this->emit(Token::T_INT, $integerPart, $location);
             return;
         }
 
@@ -218,11 +227,13 @@ final class Lexer
             $number .= $this->exponentPart();
         }
 
-        $this->emit(Token::T_FLOAT, $number);
+        $this->emit(Token::T_FLOAT, $number, $location);
     }
 
     /**
      * @param string $query
+     *
+     * @throws SyntaxError
      *
      * @return Token[]
      */
@@ -282,7 +293,7 @@ final class Lexer
             }
 
             if (isset($punctuators[$next])) {
-                $this->emit($punctuators[$next], $this->scanner->next());
+                $this->emit($punctuators[$next], $this->scanner->next(), $this->getLocation());
                 continue;
             }
 

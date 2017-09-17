@@ -8,10 +8,13 @@ final class Document extends NodeBase
 
     /**
      * @param Definition[] $definitions
-     * @param Location|null $location
      */
-    public function __construct(array $definitions = array(), Location $location = null)
+    public function __construct(array $definitions = array())
     {
+        $location = null;
+        if (empty($definitions) === false) {
+            $location = $definitions[0]->getLocation();
+        }
         parent::__construct($location);
         $this->definitions = $definitions;
     }
