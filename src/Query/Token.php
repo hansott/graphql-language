@@ -34,15 +34,13 @@ final class Token
 
     public $type;
     public $value;
-    public $line;
-    public $column;
+    public $location;
 
-    public function __construct($type, $value, $line, $column)
+    public function __construct($type, $value, Location $location)
     {
         $this->type = (int) $type;
         $this->value = (string) $value;
-        $this->line = (int) $line;
-        $this->column = (int) $column;
+        $this->location = $location;
     }
 
     private static function getNames()

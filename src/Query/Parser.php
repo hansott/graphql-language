@@ -22,7 +22,7 @@ final class Parser
             $token = $this->scanner->peek();
         }
 
-        return new ParseError($message . " (line {$token->line}, column {$token->column})");
+        return new ParseError($message . " (line {$token->location->line}, column {$token->location->column})");
     }
 
     private function expect($tokenType)

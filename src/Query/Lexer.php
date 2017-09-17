@@ -14,7 +14,8 @@ final class Lexer
     {
         $line = $this->scanner->getLine();
         $column = $this->scanner->getColumn();
-        $this->tokens[] = new Token($type, $value, $line, $column);
+        $location = new Location($line, $column);
+        $this->tokens[] = new Token($type, $value, $location);
     }
 
     private function getError($message)
