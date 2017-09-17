@@ -2,12 +2,13 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueInt implements Value
+final class ValueInt extends NodeBase implements Value
 {
     public $value;
 
-    public function __construct($value)
+    public function __construct($value, Location $location = null)
     {
+        parent::__construct($location);
         $this->value = (int) $value;
     }
 

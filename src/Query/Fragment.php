@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class Fragment implements Definition
+final class Fragment extends NodeBase implements Definition
 {
     public $name;
     public $typeCondition;
@@ -14,13 +14,16 @@ final class Fragment implements Definition
      * @param TypeCondition $typeCondition
      * @param Directive[] $directives
      * @param SelectionSet $selectionSet
+     * @param Location|null $location
      */
     public function __construct(
         $name,
         TypeCondition $typeCondition,
         array $directives = array(),
-        SelectionSet $selectionSet
+        SelectionSet $selectionSet,
+        Location $location = null
     ) {
+        parent::__construct($location);
         $this->name = (string) $name;
         $this->typeCondition = $typeCondition;
         $this->directives = $directives;

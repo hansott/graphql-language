@@ -2,12 +2,13 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class SelectionFragmentSpread implements Selection
+final class SelectionFragmentSpread extends NodeBase implements Selection
 {
     public $fragmentName;
 
-    public function __construct($fragmentName)
+    public function __construct($fragmentName, Location $location = null)
     {
+        parent::__construct($location);
         $this->fragmentName = (string) $fragmentName;
     }
 

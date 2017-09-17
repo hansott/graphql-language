@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class SelectionInlineFragment implements Selection
+final class SelectionInlineFragment extends NodeBase implements Selection
 {
     public $typeCondition;
     public $directives;
@@ -12,12 +12,15 @@ final class SelectionInlineFragment implements Selection
      * @param TypeCondition|null $typeCondition
      * @param Directive[] $directives
      * @param SelectionSet $selectionSet
+     * @param Location|null $location
      */
     public function __construct(
         TypeCondition $typeCondition = null,
         array $directives = array(),
-        SelectionSet $selectionSet
+        SelectionSet $selectionSet,
+        Location $location = null
     ) {
+        parent::__construct($location);
         $this->typeCondition = $typeCondition;
         $this->directives = $directives;
         $this->selectionSet = $selectionSet;

@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class Directive implements Node
+final class Directive extends NodeBase
 {
     public $name;
     public $arguments;
@@ -10,9 +10,11 @@ final class Directive implements Node
     /**
      * @param string $name
      * @param Argument[] $arguments
+     * @param Location|null $location
      */
-    public function __construct($name, array $arguments = array())
+    public function __construct($name, array $arguments = array(), Location $location = null)
     {
+        parent::__construct($location);
         $this->name = (string) $name;
         $this->arguments = $arguments;
     }

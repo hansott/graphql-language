@@ -2,15 +2,17 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueObject implements Value
+final class ValueObject extends NodeBase implements Value
 {
     public $fields;
 
     /**
      * @param ValueObjectField[] $fields
+     * @param Location|null $location
      */
-    public function __construct(array $fields = array())
+    public function __construct(array $fields = array(), Location $location = null)
     {
+        parent::__construct($location);
         $this->fields = $fields;
     }
 

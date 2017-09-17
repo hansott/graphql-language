@@ -2,12 +2,13 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class TypeNonNull implements Type
+final class TypeNonNull extends NodeBase implements Type
 {
     public $type;
 
-    public function __construct(Type $type)
+    public function __construct(Type $type, Location $location = null)
     {
+        parent::__construct($location);
         $this->type = $type;
     }
 

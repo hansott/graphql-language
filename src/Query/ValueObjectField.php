@@ -2,13 +2,14 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueObjectField implements Node
+final class ValueObjectField extends NodeBase
 {
     public $name;
     public $value;
 
-    public function __construct($name, Value $value)
+    public function __construct($name, Value $value, Location $location = null)
     {
+        parent::__construct($location);
         $this->name = (string) $name;
         $this->value = $value;
     }

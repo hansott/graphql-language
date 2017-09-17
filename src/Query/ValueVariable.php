@@ -2,12 +2,13 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueVariable implements Value
+final class ValueVariable extends NodeBase implements Value
 {
     public $name;
 
-    public function __construct($name)
+    public function __construct($name, Location $location = null)
     {
+        parent::__construct($location);
         $this->name = (string) $name;
     }
 

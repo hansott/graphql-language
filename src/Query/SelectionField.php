@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class SelectionField implements Selection
+final class SelectionField extends NodeBase implements Selection
 {
     public $name;
     public $alias;
@@ -16,14 +16,17 @@ final class SelectionField implements Selection
      * @param Argument[] $arguments
      * @param Directive[] $directives
      * @param SelectionSet|null $selectionSet
+     * @param Location|null $location
      */
     public function __construct(
         $alias = null,
         $name,
         array $arguments = array(),
         array $directives = array(),
-        SelectionSet $selectionSet = null
+        SelectionSet $selectionSet = null,
+        Location $location = null
     ) {
+        parent::__construct($location);
         $this->alias = $alias ? (string) $alias : null;
         $this->name = (string) $name;
         $this->arguments = $arguments;

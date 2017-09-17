@@ -2,12 +2,13 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class TypeNamed implements Type
+final class TypeNamed extends NodeBase implements Type
 {
     public $name;
 
-    public function __construct($name)
+    public function __construct($name, Location $location = null)
     {
+        parent::__construct($location);
         $this->name = (string) $name;
     }
 
