@@ -789,6 +789,51 @@ final class ParserTest extends TestCase
                         )
                     )
                 )
+            ),
+            array(
+                'query dog($name: [String!]!) { name }',
+                new Document(
+                    array(
+                        new OperationQuery(
+                            'dog',
+                            array(
+                                new VariableDefinition(
+                                    new ValueVariable(
+                                        'name',
+                                        new Location(1, 11)
+                                    ),
+                                    new TypeNonNull(
+                                        new TypeList(
+                                            new TypeNonNull(
+                                                new TypeNamed('String', new Location(1, 19)),
+                                                new Location(1, 19)
+                                            ),
+                                            new Location(1, 18)
+                                        ),
+                                        new Location(1, 18)
+                                    ),
+                                    null,
+                                    new Location(1, 11)
+                                ),
+                            ),
+                            array(),
+                            new SelectionSet(
+                                array(
+                                    new SelectionField(
+                                        null,
+                                        'name',
+                                        array(),
+                                        array(),
+                                        null,
+                                        new Location(1, 32)
+                                    ),
+                                ),
+                                new Location(1, 30)
+                            ),
+                            new Location(1, 1)
+                        ),
+                    )
+                )
             )
         );
     }

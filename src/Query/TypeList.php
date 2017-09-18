@@ -4,20 +4,20 @@ namespace HansOtt\GraphQL\Query;
 
 final class TypeList extends NodeBase implements Type
 {
-    public $types;
+    public $type;
 
     /**
-     * @param Type[] $types
+     * @param Type $type
      * @param Location|null $location
      */
-    public function __construct(array $types, Location $location = null)
+    public function __construct(Type $type, Location $location = null)
     {
         parent::__construct($location);
-        $this->types = $types;
+        $this->type = $type;
     }
 
     public function getChildren()
     {
-        return $this->types;
+        return array($this->type);
     }
 }

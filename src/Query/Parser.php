@@ -297,22 +297,10 @@ final class Parser
     private function parseListType()
     {
         $location = $this->expect(Token::T_BRACKET_LEFT)->location;
+        $type = $this->parseType();
+        $this->accept(Token::T_BRACKET_RIGHT);
 
-        $types = array();
-        while (true) {
-            if ($this->scanner->eof()) {
-                throw $this->getParseError('Unclosed bracket of list type');
-            }
-
-            if ($this->accept(Token::T_BRACE_RIGHT)) {
-                break;
-            }
-
-            $types[] = $this->parseType();
-            $this->accept(Token::T_COMMA);
-        }
-
-        return new TypeList($types, $location);
+        return new TypeList($type, $location);
     }
 
     private function parseNamedType()
@@ -320,21 +308,23 @@ final class Parser
         $nameToken = $this->expect(Token::T_NAME);
         $type = new TypeNamed($nameToken->value, $nameToken->location);
 
-        if ($this->accept(Token::T_EXCLAMATION)) {
-            return new TypeNonNull($type, $type->location);
-        }
-
         return $type;
     }
 
     private function parseType()
     {
+        $type = null;
         if ($this->is(Token::T_BRACKET_LEFT)) {
-            return $this->parseListType();
+            $type = $this->parseListType();
+        } elseif ($this->is(Token::T_NAME)) {
+            $type = $this->parseNamedType();
         }
 
-        if ($this->is(Token::T_NAME)) {
-            return $this->parseNamedType();
+        if ($type !== null) {
+            if ($this->accept(Token::T_EXCLAMATION)) {
+                return new TypeNonNull($type, $type->location);
+            }
+            return $type;
         }
 
         $message = 'Expected a type';
