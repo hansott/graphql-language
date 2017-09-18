@@ -19,6 +19,8 @@ $ composer require hansott/graphql-language
 
 ## Usage
 
+### Parsing a query to a [HansOtt\GraphQL\Query\Document](src/Query/Document.php)
+
 ``` php
 use HansOtt\GraphQL\Query\ParseError;
 use HansOtt\GraphQL\Query\SyntaxError;
@@ -43,6 +45,50 @@ try {
 } catch (ParseError $e) {
     echo "Failed to parse query: {$e->getMessage()}" . PHP_EOL;
 }
+```
+
+### Traversing a [HansOtt\GraphQL\Query\Document](src/Query/Document.php)
+
+```php
+use HansOtt\GraphQL\Query\Node;
+use HansOtt\GraphQL\Query\Traverser;
+use HansOtt\GraphQL\Query\VisitorBase;
+use HansOtt\GraphQL\Query\OperationQuery;
+
+final class VisitorQueryFinder extends VisitorBase // Or implement HansOtt\GraphQL\Query\Visitor
+{
+    /**
+     * @var OperationQuery[]
+     */
+    private $queries = [];
+
+    public function enterNode(Node $node)
+    {
+        if ($node instanceof OperationQuery) {
+            $this->queries[] = $node;
+        }
+    }
+
+    public function getQueries()
+    {
+        return $this->queries;
+    }
+}
+
+$document = $parser->parse($query);
+$finder = new VisitorQueryFinder;
+
+$traverser = new Traverser($finder);
+$traverser->traverse($document);
+var_dump($finder->getQueries());
+
+// Or if you need multiple visitors
+// use HansOtt\GraphQL\Query\VisitorMany
+
+$visitors = new VisitorMany([$finder, ...]);
+$traverser = new Traverser($visitors);
+$traverser->traverse($document);
+var_dump($finder->getQueries());
 ```
 
 ## Change log
