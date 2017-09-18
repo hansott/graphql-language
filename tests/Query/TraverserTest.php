@@ -133,7 +133,20 @@ final class TraverserTest extends TestCase
                 array($this->equalTo($document))
             );
 
-        $traverser = new Traverser($visitor);
+        $countingVisitor = new VisitorCounting;
+        $visitors = new VisitorMany(
+            array(
+                $countingVisitor,
+                $visitor,
+            )
+        );
+
+        $traverser = new Traverser($visitors);
         $traverser->traverse($document);
+
+        $this->assertEquals(
+            21,
+            $countingVisitor->getCount()
+        );
     }
 }
