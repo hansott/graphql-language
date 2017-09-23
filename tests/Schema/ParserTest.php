@@ -30,6 +30,24 @@ final class ParserTest extends TestCase
         );
     }
 
+    public function validSchemasForCrashTest()
+    {
+        return array(
+            array('union U = U | U'),
+        );
+    }
+
+    /**
+     * @dataProvider validSchemasForCrashTest
+     *
+     * @param string $schema
+     */
+    public function test_it_does_not_crash_for_valid_schema($schema)
+    {
+        $schema = $this->parser->parse($schema);
+        $this->assertInstanceOf('HansOtt\\GraphQL\\Schema', $schema);
+    }
+
     /**
      * @dataProvider invalidSchemas
      * @expectedException \HansOtt\GraphQL\Shared\ParseError
