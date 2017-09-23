@@ -29,6 +29,5 @@ final class Token extends TokenShared
     const T_BRACKET_RIGHT = 20;
     const T_BRACE_LEFT = 21;
     const T_BRACE_RIGHT = 22;
-    const T_PIPE = 23;
-    const T_COMMA = 24;
+    const T_COMMA = 23;
 }
