@@ -429,6 +429,11 @@ final class Parser extends ParserShared
         return new Document($definitions);
     }
 
+    /**
+     * @param string $query
+     *
+     * @return Document
+     */
     public function parse($query)
     {
         $tokens = $this->lexer->lex($query);
