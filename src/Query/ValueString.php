@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueString extends NodeBase implements Value
+final class ValueString extends NodeBase implements ValueScalar
 {
     public $value;
 

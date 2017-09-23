@@ -2,10 +2,6 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueNull extends NodeBase implements Value
+final class ValueNull extends NodeBase implements ValueScalar
 {
-    public function getChildren()
-    {
-        return array();
-    }
 }

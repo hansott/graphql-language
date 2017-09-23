@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueFloat extends NodeBase implements Value
+final class ValueFloat extends NodeBase implements ValueScalar
 {
     public $value;
 

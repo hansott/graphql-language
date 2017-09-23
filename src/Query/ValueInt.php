@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueInt extends NodeBase implements Value
+final class ValueInt extends NodeBase implements ValueScalar
 {
     public $value;
 
