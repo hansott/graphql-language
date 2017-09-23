@@ -21,4 +21,9 @@ final class Argument extends NodeBase
         $this->type = $type;
         $this->defaultValue = $defaultValue;
     }
+
+    public function getChildren()
+    {
+        return array($this->type, $this->defaultValue);
+    }
 }

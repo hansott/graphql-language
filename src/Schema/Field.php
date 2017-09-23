@@ -24,6 +24,9 @@ final class Field extends NodeBase
 
     public function getChildren()
     {
-        return $this->arguments;
+        return array_merge(
+            array($this->type),
+            $this->arguments
+        );
     }
 }
