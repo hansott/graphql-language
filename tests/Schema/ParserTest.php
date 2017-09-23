@@ -350,6 +350,68 @@ final class ParserTest extends TestCase
                     )
                 )
             ),
+            array(
+                '
+                    type Query {
+                        name(
+                            enum: Enum = ACTIVE,
+                            int: Int = 1,
+                            string: String = "String",
+                            list: [String] = ["\\" \\n \\t \\r \\ud83d\\ude00"]
+                        ): String
+                    }
+                ',
+                new Schema(
+                    array(
+                        new DeclarationObject(
+                            'Query',
+                            array(
+                                new Field(
+                                    'name',
+                                    new TypeNamed('String', new Location(8, 29)),
+                                    array(
+                                        new Argument(
+                                            'enum',
+                                            new TypeNamed('Enum', new Location(4, 36)),
+                                            new ValueEnum('ACTIVE', new Location(4, 43)),
+                                            new Location(4, 30)
+                                        ),
+                                        new Argument(
+                                            'int',
+                                            new TypeNamed('Int', new Location(5, 35)),
+                                            new ValueInt(1, new Location(5, 41)),
+                                            new Location(5, 30)
+                                        ),
+                                        new Argument(
+                                            'string',
+                                            new TypeNamed('String', new Location(6, 38)),
+                                            new ValueString('String', new Location(6, 47)),
+                                            new Location(6, 30)
+                                        ),
+                                        new Argument(
+                                            'list',
+                                            new TypeList(
+                                                new TypeNamed('String', new Location(7, 37)),
+                                                new Location(7, 36)
+                                            ),
+                                            new ValueList(
+                                                array(
+                                                    new ValueString("\" \n \t \r 😀", new Location(7, 48)),
+                                                ),
+                                                new Location(7, 47)
+                                            ),
+                                            new Location(7, 30)
+                                        ),
+                                    ),
+                                    new Location(3, 26)
+                                ),
+                            ),
+                            null,
+                            new Location(2, 22)
+                        )
+                    )
+                )
+            ),
         );
     }
 
