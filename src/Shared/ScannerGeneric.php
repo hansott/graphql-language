@@ -1,6 +1,6 @@
 <?php
 
-namespace HansOtt\GraphQL\Query;
+namespace HansOtt\GraphQL\Shared;
 
 final class ScannerGeneric implements Scanner
 {

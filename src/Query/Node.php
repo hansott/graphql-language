@@ -2,15 +2,8 @@
 
 namespace HansOtt\GraphQL\Query;
 
-interface Node
-{
-    /**
-     * @return Node[]
-     */
-    public function getChildren();
+use HansOtt\GraphQL\Shared\Node as NodeShared;
 
-    /**
-     * @return Location
-     */
-    public function getLocation();
+interface Node extends NodeShared
+{
 }

@@ -2,9 +2,9 @@
 
 namespace HansOtt\GraphQL\Query;
 
-use ReflectionClass;
+use HansOtt\GraphQL\Shared\Token as TokenShared;
 
-final class Token
+final class Token extends TokenShared
 {
     const T_NAME = 0;
     const T_STRING = 1;
@@ -31,42 +31,4 @@ final class Token
     const T_BRACE_RIGHT = 22;
     const T_PIPE = 23;
     const T_COMMA = 24;
-
-    public $type;
-    public $value;
-    public $location;
-
-    public function __construct($type, $value, Location $location)
-    {
-        $this->type = (int) $type;
-        $this->value = (string) $value;
-        $this->location = $location;
-    }
-
-    private static function getNames()
-    {
-        static $typeToName;
-
-        if (is_array($typeToName)) {
-            return $typeToName;
-        }
-
-        $reflection = new ReflectionClass('HansOtt\\GraphQL\\Query\\Token');
-        $constants = $reflection->getConstants();
-        $typeToName = array_flip($constants);
-
-        return $typeToName;
-    }
-
-    public static function getNameFor($type)
-    {
-        $typeToName = static::getNames();
-
-        return $typeToName[$type];
-    }
-
-    public function getName()
-    {
-        return static::getNameFor($this->type);
-    }
 }

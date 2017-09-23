@@ -2,8 +2,8 @@
 
 namespace HansOtt\GraphQL\Query;
 
-use Exception;
+use HansOtt\GraphQL\Shared\SyntaxError as SyntaxErrorShared;
 
-final class SyntaxError extends Exception
+final class SyntaxError extends SyntaxErrorShared
 {
 }
