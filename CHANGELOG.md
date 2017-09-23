@@ -1,3 +1,3 @@
 # Changelog
 
-All Notable changes to `hansott/graphql-language` will be documented in this file.
+See [releases](https://github.com/hansott/graphql-language/releases).

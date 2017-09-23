@@ -2,14 +2,8 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class Location
-{
-    public $line;
-    public $column;
+use HansOtt\GraphQL\Shared\Location as LocationShared;
 
-    public function __construct($line, $column)
-    {
-        $this->line = (int) $line;
-        $this->column = (int) $column;
-    }
+final class Location extends LocationShared
+{
 }

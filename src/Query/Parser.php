@@ -2,61 +2,15 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class Parser
+use HansOtt\GraphQL\Shared\ScannerTokens;
+use HansOtt\GraphQL\Shared\ScannerGeneric;
+use HansOtt\GraphQL\Shared\Parser as ParserShared;
+
+final class Parser extends ParserShared
 {
-    /**
-     * @var ScannerTokens
-     */
-    private $scanner;
-    private $lexer;
-
-    public function __construct(Lexer $lexer)
+    protected function getNameFor($tokenType)
     {
-        $this->lexer = $lexer;
-    }
-
-    private function getParseError($message)
-    {
-        $token = $this->scanner->getLastToken();
-        if ($this->scanner->eof() === false) {
-            $token = $this->scanner->peek();
-        }
-
-        return new ParseError($message . " (line {$token->location->line}, column {$token->location->column})");
-    }
-
-    private function expect($tokenType)
-    {
-        $token = $this->scanner->next();
-
-        if ($token->type !== $tokenType) {
-            $expectedToken = Token::getNameFor($tokenType);
-            throw $this->getParseError("Expected \"{$expectedToken}\" but instead found \"{$token->getName()}\" with value \"{$token->value}\"");
-        }
-
-        return $token;
-    }
-
-    private function accept($tokenType)
-    {
-        $token = $this->scanner->peek();
-
-        if ($token->type !== $tokenType) {
-            return false;
-        }
-
-        return $this->scanner->next();
-    }
-
-    private function is($tokenType)
-    {
-        if ($this->scanner->eof()) {
-            return false;
-        }
-
-        $token = $this->scanner->peek();
-
-        return $token->type === $tokenType;
+        return Token::getNameFor($tokenType);
     }
 
     private function parseObject()
@@ -475,6 +429,11 @@ final class Parser
         return new Document($definitions);
     }
 
+    /**
+     * @param string $query
+     *
+     * @return Document
+     */
     public function parse($query)
     {
         $tokens = $this->lexer->lex($query);

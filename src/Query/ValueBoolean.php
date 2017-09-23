@@ -2,7 +2,7 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class ValueBoolean extends NodeBase implements Value
+final class ValueBoolean extends NodeBase implements ValueScalar
 {
     private $isTrue;
 
@@ -10,10 +10,5 @@ final class ValueBoolean extends NodeBase implements Value
     {
         parent::__construct($location);
         $this->isTrue = (bool) $isTrue;
-    }
-
-    public function getChildren()
-    {
-        return array();
     }
 }

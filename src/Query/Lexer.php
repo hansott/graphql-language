@@ -2,7 +2,11 @@
 
 namespace HansOtt\GraphQL\Query;
 
-final class Lexer
+use HansOtt\GraphQL\Shared\ScannerGeneric;
+use HansOtt\GraphQL\Shared\ScannerWithLocation;
+use HansOtt\GraphQL\Shared\Lexer as LexerShared;
+
+final class Lexer implements LexerShared
 {
     /**
      * @var ScannerWithLocation

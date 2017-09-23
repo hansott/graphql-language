@@ -15,9 +15,4 @@ final class ValueList extends NodeBase implements Value
         parent::__construct($location);
         $this->values = $values;
     }
-
-    public function getChildren()
-    {
-        return $this->values;
-    }
 }

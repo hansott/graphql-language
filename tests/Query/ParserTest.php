@@ -37,7 +37,7 @@ final class ParserTest extends TestCase
      *
      * @dataProvider queriesWithSyntaxError
      *
-     * @expectedException \HansOtt\GraphQL\Query\SyntaxError
+     * @expectedException \HansOtt\GraphQL\Shared\SyntaxError
      */
     public function test_it_throws_an_exception_if_syntax_error($query)
     {
@@ -62,7 +62,7 @@ final class ParserTest extends TestCase
      *
      * @dataProvider queriesWithParseError
      *
-     * @expectedException \HansOtt\GraphQL\Query\ParseError
+     * @expectedException \HansOtt\GraphQL\Shared\ParseError
      */
     public function test_it_throws_an_exception_if_parse_error($query)
     {
