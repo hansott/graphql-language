@@ -15,9 +15,4 @@ final class TypeNamed extends NodeBase implements Type
         parent::__construct($location);
         $this->name = (string) $name;
     }
-
-    public function getChildren()
-    {
-        return array();
-    }
 }
