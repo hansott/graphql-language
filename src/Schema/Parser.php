@@ -321,13 +321,15 @@ final class Parser extends ParserShared
 
             $members[] = $this->expect(Token::T_NAME)->value;
 
-            if ($this->accept(Token::T_PIPE) === false) {
+            if ($this->is(Token::T_PIPE) === false) {
                 return new DeclarationUnion(
                     $name,
                     $members,
                     $location
                 );
             }
+
+            $this->expect(Token::T_PIPE);
         }
 
         throw $this->getParseError('Expected an interface field but instead reached end');

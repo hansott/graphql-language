@@ -45,7 +45,7 @@ final class ParserTest extends TestCase
     public function test_it_does_not_crash_for_valid_schema($schema)
     {
         $schema = $this->parser->parse($schema);
-        $this->assertInstanceOf('HansOtt\\GraphQL\\Schema', $schema);
+        $this->assertInstanceOf('HansOtt\\GraphQL\\Schema\\Schema', $schema);
     }
 
     /**
