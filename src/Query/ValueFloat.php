@@ -11,9 +11,4 @@ final class ValueFloat extends NodeBase implements ValueScalar
         parent::__construct($location);
         $this->value = (float) $value;
     }
-
-    public function getChildren()
-    {
-        return array();
-    }
 }

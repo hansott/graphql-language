@@ -11,9 +11,4 @@ final class ValueEnum extends NodeBase implements Value
         parent::__construct($location);
         $this->value = (string) $value;
     }
-
-    public function getChildren()
-    {
-        return array();
-    }
 }

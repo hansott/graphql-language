@@ -15,9 +15,4 @@ final class ValueVariable extends NodeBase implements Value
         parent::__construct($location);
         $this->name = (string) $name;
     }
-
-    public function getChildren()
-    {
-        return array();
-    }
 }

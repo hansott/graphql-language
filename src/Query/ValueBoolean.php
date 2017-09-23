@@ -11,9 +11,4 @@ final class ValueBoolean extends NodeBase implements ValueScalar
         parent::__construct($location);
         $this->isTrue = (bool) $isTrue;
     }
-
-    public function getChildren()
-    {
-        return array();
-    }
 }

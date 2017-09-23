@@ -11,9 +11,4 @@ final class ValueString extends NodeBase implements ValueScalar
         parent::__construct($location);
         $this->value = (string) $value;
     }
-
-    public function getChildren()
-    {
-        return array();
-    }
 }

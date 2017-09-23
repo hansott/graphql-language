@@ -11,9 +11,4 @@ final class ValueInt extends NodeBase implements ValueScalar
         parent::__construct($location);
         $this->value = (int) $value;
     }
-
-    public function getChildren()
-    {
-        return array();
-    }
 }
