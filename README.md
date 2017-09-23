@@ -91,6 +91,73 @@ $traverser->traverse($document);
 var_dump($finder->getQueries());
 ```
 
+### Parsing a schema declaration to a [HansOtt\GraphQL\Schema\Schema](src/Schema/Schema.php)
+
+```php
+use HansOtt\GraphQL\Schema\ParseError;
+use HansOtt\GraphQL\Schema\SyntaxError;
+use HansOtt\GraphQL\Schema\ParserFactory;
+
+$factory = new ParserFactory;
+$parser = $factory->create();
+
+$schema = <<<'SCHEMA'
+    enum DogCommand { SIT, DOWN, HEEL }
+    
+    type Dog implements Pet {
+        name: String!
+        nickname: String
+        barkVolume: Int
+        doesKnowCommand(dogCommand: DogCommand!): Boolean!
+        isHousetrained(atOtherHomes: Boolean): Boolean!
+        owner: Human
+    }
+    
+    interface Sentient {
+        name: String!
+    }
+    
+    interface Pet {
+        name: String!
+    }
+    
+    type Alien implements Sentient {
+        name: String!
+        homePlanet: String
+    }
+    
+    type Human implements Sentient {
+        name: String!
+    }
+    
+    enum CatCommand { JUMP }
+    
+    type Cat implements Pet {
+        name: String!
+        nickname: String
+        doesKnowCommand(catCommand: CatCommand!): Boolean!
+        meowVolume: Int
+    }
+    
+    union CatOrDog = Cat | Dog
+    union DogOrHuman = Dog | Human
+    union HumanOrAlien = Human | Alien
+    
+    type QueryRoot {
+        dog: Dog
+    }
+SCHEMA;
+
+try {
+    $schema = $parser->parse($schema);
+    var_dump($schema); // Instance of HansOtt\GraphQL\Schema\Schema
+} catch (SyntaxError $e) {
+    echo "Syntax error in query: {$e->getMessage()}" . PHP_EOL;
+} catch (ParseError $e) {
+    echo "Failed to parse query: {$e->getMessage()}" . PHP_EOL;
+}
+```
+
 ## Change log
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
