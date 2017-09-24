@@ -9,6 +9,8 @@
 
 A GraphQL parser written in PHP. The parser is able to parse the full [spec](https://facebook.github.io/graphql/). This package is compatible with PHP 5.3+. I'm still actively working on this project. Expect things to break. 🙈
 
+This package is being developed together with a server package, which isn't public yet.
+
 ## Install
 
 Via Composer
