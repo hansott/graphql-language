@@ -7,7 +7,7 @@
 [![Quality Score][ico-code-quality]][link-code-quality]
 [![Total Downloads][ico-downloads]][link-downloads]
 
-A GraphQL parser written in PHP. The parser is able to parse the full [spec](https://facebook.github.io/graphql/). This package is compatible with PHP 5.3+.
+A GraphQL parser written in PHP. The parser is able to parse the full [spec](https://facebook.github.io/graphql/). This package is compatible with PHP 5.3+. I'm still actively working on this project. Expect things to break. 🙈
 
 ## Install
 
