@@ -9,3 +9,4 @@
 * [ ] Hide public properties on AST and provide getters for it (Immutability)
 * [ ] Better file structure (Too much classes in one directory)
 * [ ] Better traverser, or at least find a use case for it, maybe replace with utility functions (The getters will help for this too) (Use case: Rate limiter, detect amount of possible nodes in query, like GitHub's GraphQL API)
+* [ ] Combine schema and query document parser into one
