@@ -1,0 +1,142 @@
+{
+  nearestThing(location: { lon: 12.43, lat: -53.211 })
+}
+----
+object(HansOtt\GraphQL\Query\Document)#49 (2) {
+  ["definitions"]=>
+  array(1) {
+    [0]=>
+    object(HansOtt\GraphQL\Query\OperationQuery)#48 (5) {
+      ["name"]=>
+      NULL
+      ["variables"]=>
+      array(0) {
+      }
+      ["directives"]=>
+      array(0) {
+      }
+      ["selectionSet"]=>
+      object(HansOtt\GraphQL\Query\SelectionSet)#47 (2) {
+        ["selections"]=>
+        array(1) {
+          [0]=>
+          object(HansOtt\GraphQL\Query\SelectionField)#46 (6) {
+            ["name"]=>
+            string(12) "nearestThing"
+            ["alias"]=>
+            NULL
+            ["arguments"]=>
+            array(1) {
+              [0]=>
+              object(HansOtt\GraphQL\Query\Argument)#45 (3) {
+                ["name"]=>
+                string(8) "location"
+                ["value"]=>
+                object(HansOtt\GraphQL\Query\ValueObject)#44 (2) {
+                  ["fields"]=>
+                  array(2) {
+                    [0]=>
+                    object(HansOtt\GraphQL\Query\ValueObjectField)#40 (3) {
+                      ["name"]=>
+                      string(3) "lon"
+                      ["value"]=>
+                      object(HansOtt\GraphQL\Query\ValueFloat)#41 (2) {
+                        ["value"]=>
+                        float(12.43)
+                        ["location"]=>
+                        object(HansOtt\GraphQL\Query\Location)#22 (2) {
+                          ["line"]=>
+                          int(2)
+                          ["column"]=>
+                          int(33)
+                        }
+                      }
+                      ["location"]=>
+                      object(HansOtt\GraphQL\Query\Location)#18 (2) {
+                        ["line"]=>
+                        int(2)
+                        ["column"]=>
+                        int(29)
+                      }
+                    }
+                    [1]=>
+                    object(HansOtt\GraphQL\Query\ValueObjectField)#42 (3) {
+                      ["name"]=>
+                      string(3) "lat"
+                      ["value"]=>
+                      object(HansOtt\GraphQL\Query\ValueFloat)#43 (2) {
+                        ["value"]=>
+                        float(-53.211)
+                        ["location"]=>
+                        object(HansOtt\GraphQL\Query\Location)#30 (2) {
+                          ["line"]=>
+                          int(2)
+                          ["column"]=>
+                          int(45)
+                        }
+                      }
+                      ["location"]=>
+                      object(HansOtt\GraphQL\Query\Location)#26 (2) {
+                        ["line"]=>
+                        int(2)
+                        ["column"]=>
+                        int(41)
+                      }
+                    }
+                  }
+                  ["location"]=>
+                  object(HansOtt\GraphQL\Query\Location)#16 (2) {
+                    ["line"]=>
+                    int(2)
+                    ["column"]=>
+                    int(27)
+                  }
+                }
+                ["location"]=>
+                object(HansOtt\GraphQL\Query\Location)#12 (2) {
+                  ["line"]=>
+                  int(2)
+                  ["column"]=>
+                  int(17)
+                }
+              }
+            }
+            ["directives"]=>
+            array(0) {
+            }
+            ["selectionSet"]=>
+            NULL
+            ["location"]=>
+            object(HansOtt\GraphQL\Query\Location)#8 (2) {
+              ["line"]=>
+              int(2)
+              ["column"]=>
+              int(4)
+            }
+          }
+        }
+        ["location"]=>
+        object(HansOtt\GraphQL\Query\Location)#6 (2) {
+          ["line"]=>
+          int(1)
+          ["column"]=>
+          int(1)
+        }
+      }
+      ["location"]=>
+      object(HansOtt\GraphQL\Query\Location)#6 (2) {
+        ["line"]=>
+        int(1)
+        ["column"]=>
+        int(1)
+      }
+    }
+  }
+  ["location"]=>
+  object(HansOtt\GraphQL\Query\Location)#6 (2) {
+    ["line"]=>
+    int(1)
+    ["column"]=>
+    int(1)
+  }
+}

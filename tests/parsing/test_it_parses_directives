@@ -1,0 +1,154 @@
+{
+  foo @skip(if: true)
+  bar
+  foo
+}
+----
+object(HansOtt\GraphQL\Query\Document)#40 (2) {
+  ["definitions"]=>
+  array(1) {
+    [0]=>
+    object(HansOtt\GraphQL\Query\OperationQuery)#39 (5) {
+      ["name"]=>
+      NULL
+      ["variables"]=>
+      array(0) {
+      }
+      ["directives"]=>
+      array(0) {
+      }
+      ["selectionSet"]=>
+      object(HansOtt\GraphQL\Query\SelectionSet)#38 (2) {
+        ["selections"]=>
+        array(3) {
+          [0]=>
+          object(HansOtt\GraphQL\Query\SelectionField)#35 (6) {
+            ["name"]=>
+            string(3) "foo"
+            ["alias"]=>
+            NULL
+            ["arguments"]=>
+            array(0) {
+            }
+            ["directives"]=>
+            array(1) {
+              [0]=>
+              object(HansOtt\GraphQL\Query\Directive)#34 (3) {
+                ["name"]=>
+                string(4) "skip"
+                ["arguments"]=>
+                array(1) {
+                  [0]=>
+                  object(HansOtt\GraphQL\Query\Argument)#33 (3) {
+                    ["name"]=>
+                    string(2) "if"
+                    ["value"]=>
+                    object(HansOtt\GraphQL\Query\ValueBoolean)#32 (2) {
+                      ["isTrue":"HansOtt\GraphQL\Query\ValueBoolean":private]=>
+                      bool(true)
+                      ["location"]=>
+                      object(HansOtt\GraphQL\Query\Location)#20 (2) {
+                        ["line"]=>
+                        int(2)
+                        ["column"]=>
+                        int(18)
+                      }
+                    }
+                    ["location"]=>
+                    object(HansOtt\GraphQL\Query\Location)#16 (2) {
+                      ["line"]=>
+                      int(2)
+                      ["column"]=>
+                      int(14)
+                    }
+                  }
+                }
+                ["location"]=>
+                object(HansOtt\GraphQL\Query\Location)#10 (2) {
+                  ["line"]=>
+                  int(2)
+                  ["column"]=>
+                  int(8)
+                }
+              }
+            }
+            ["selectionSet"]=>
+            NULL
+            ["location"]=>
+            object(HansOtt\GraphQL\Query\Location)#8 (2) {
+              ["line"]=>
+              int(2)
+              ["column"]=>
+              int(4)
+            }
+          }
+          [1]=>
+          object(HansOtt\GraphQL\Query\SelectionField)#36 (6) {
+            ["name"]=>
+            string(3) "bar"
+            ["alias"]=>
+            NULL
+            ["arguments"]=>
+            array(0) {
+            }
+            ["directives"]=>
+            array(0) {
+            }
+            ["selectionSet"]=>
+            NULL
+            ["location"]=>
+            object(HansOtt\GraphQL\Query\Location)#24 (2) {
+              ["line"]=>
+              int(3)
+              ["column"]=>
+              int(4)
+            }
+          }
+          [2]=>
+          object(HansOtt\GraphQL\Query\SelectionField)#37 (6) {
+            ["name"]=>
+            string(3) "foo"
+            ["alias"]=>
+            NULL
+            ["arguments"]=>
+            array(0) {
+            }
+            ["directives"]=>
+            array(0) {
+            }
+            ["selectionSet"]=>
+            NULL
+            ["location"]=>
+            object(HansOtt\GraphQL\Query\Location)#26 (2) {
+              ["line"]=>
+              int(4)
+              ["column"]=>
+              int(4)
+            }
+          }
+        }
+        ["location"]=>
+        object(HansOtt\GraphQL\Query\Location)#6 (2) {
+          ["line"]=>
+          int(1)
+          ["column"]=>
+          int(1)
+        }
+      }
+      ["location"]=>
+      object(HansOtt\GraphQL\Query\Location)#6 (2) {
+        ["line"]=>
+        int(1)
+        ["column"]=>
+        int(1)
+      }
+    }
+  }
+  ["location"]=>
+  object(HansOtt\GraphQL\Query\Location)#6 (2) {
+    ["line"]=>
+    int(1)
+    ["column"]=>
+    int(1)
+  }
+}

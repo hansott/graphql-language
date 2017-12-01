@@ -442,6 +442,8 @@ final class Parser extends ParserShared
     /**
      * @param string $query
      *
+     * @throws \HansOtt\GraphQL\Shared\SyntaxError
+     *
      * @return Document
      */
     public function parse($query)
