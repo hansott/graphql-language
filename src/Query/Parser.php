@@ -369,7 +369,12 @@ final class Parser extends ParserShared
 
         if ($this->is(Token::T_MUTATION)) {
             $location = $this->expect(Token::T_MUTATION)->location;
-            $name = $this->expect(Token::T_NAME)->value;
+
+            $name = null;
+            if ($this->is(Token::T_NAME)) {
+                $name = $this->expect(Token::T_NAME)->value;
+            }
+
             $variables = $this->parseVariableDefinitionList();
             $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
@@ -379,7 +384,12 @@ final class Parser extends ParserShared
 
         if ($this->is(Token::T_SUBSCRIPTION)) {
             $location = $this->expect(Token::T_SUBSCRIPTION)->location;
-            $name = $this->expect(Token::T_NAME)->value;
+
+            $name = null;
+            if ($this->is(Token::T_NAME)) {
+                $name = $this->expect(Token::T_NAME)->value;
+            }
+
             $variables = $this->parseVariableDefinitionList();
             $directives = $this->parseDirectiveList();
             $selectionSet = $this->parseSelectionSet();
