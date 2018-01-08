@@ -131,21 +131,25 @@ final class Lexer implements LexerShared
 
     private function integerPart()
     {
-        $number = $this->scanner->next();
+        if ($this->scanner->eof()) {
+            throw $this->getError('Expected an integer or a float but instead reached end');
+        }
+
         $location = $this->getLocation();
-        if ($number === '-') {
+        $next = $this->scanner->peek();
+        $number = '';
+        if ($next === '-') {
+            $number .= $next;
+            $this->scanner->next();
             if ($this->scanner->eof()) {
-                throw $this->getError('Expected a digit but instead reached end');
-            }
-            $next = $this->scanner->peek();
-            if (ctype_digit($next) === false) {
-                throw $this->getError("Expected a digit but instead found \"{$next}\"");
+                throw $this->getError('Expected an integer or a float but instead reached end');
             }
         }
 
         $next = $this->scanner->peek();
         if ($next === '0') {
-            $number .= $this->scanner->next();
+            $number .= $next;
+            $this->scanner->next();
             return array($number, $location);
         }
 

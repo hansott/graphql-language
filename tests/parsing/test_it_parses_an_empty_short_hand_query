@@ -1,0 +1,45 @@
+{}
+----
+object(HansOtt\GraphQL\Query\Document)#14 (2) {
+  ["definitions"]=>
+  array(1) {
+    [0]=>
+    object(HansOtt\GraphQL\Query\OperationQuery)#13 (5) {
+      ["name"]=>
+      NULL
+      ["variables"]=>
+      array(0) {
+      }
+      ["directives"]=>
+      array(0) {
+      }
+      ["selectionSet"]=>
+      object(HansOtt\GraphQL\Query\SelectionSet)#12 (2) {
+        ["selections"]=>
+        array(0) {
+        }
+        ["location"]=>
+        object(HansOtt\GraphQL\Query\Location)#6 (2) {
+          ["line"]=>
+          int(1)
+          ["column"]=>
+          int(1)
+        }
+      }
+      ["location"]=>
+      object(HansOtt\GraphQL\Query\Location)#6 (2) {
+        ["line"]=>
+        int(1)
+        ["column"]=>
+        int(1)
+      }
+    }
+  }
+  ["location"]=>
+  object(HansOtt\GraphQL\Query\Location)#6 (2) {
+    ["line"]=>
+    int(1)
+    ["column"]=>
+    int(1)
+  }
+}

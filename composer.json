@@ -40,5 +40,6 @@
     },
     "config": {
         "sort-packages": true
-    }
+    },
+    "bin": ["bin/graphql-parser"]
 }

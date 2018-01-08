@@ -1,0 +1,36 @@
+#!/usr/bin/env php
+<?php
+
+use HansOtt\GraphQL\Query\ParserFactory;
+
+foreach ([__DIR__ . '/../../../autoload.php', __DIR__ . '/../vendor/autoload.php'] as $file) {
+    if (file_exists($file)) {
+        require $file;
+        break;
+    }
+}
+
+if (isset($argv[1]) === false) {
+    echo "Pass GraphQL code or a path to a file.\n";
+    exit(1);
+}
+
+$graphql = $argv[1];
+
+if (file_exists($graphql) && is_file($graphql)) {
+    $graphql = file_get_contents($graphql);
+}
+
+$parser = (new ParserFactory)->create();
+
+try {
+    $document = $parser->parse($graphql);
+} catch (\HansOtt\GraphQL\Shared\SyntaxError $e) {
+    echo "Syntax Error: {$e->getMessage()}\n";
+    exit(1);
+} catch (\HansOtt\GraphQL\Shared\ParseError $e) {
+    echo "Parse Error: {$e->getMessage()}\n";
+    exit(1);
+}
+
+var_dump($document);

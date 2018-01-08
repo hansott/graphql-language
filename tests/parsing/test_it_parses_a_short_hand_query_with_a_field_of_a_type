@@ -1,0 +1,100 @@
+{ author { name } }
+----
+object(HansOtt\GraphQL\Query\Document)#25 (2) {
+  ["definitions"]=>
+  array(1) {
+    [0]=>
+    object(HansOtt\GraphQL\Query\OperationQuery)#24 (5) {
+      ["name"]=>
+      NULL
+      ["variables"]=>
+      array(0) {
+      }
+      ["directives"]=>
+      array(0) {
+      }
+      ["selectionSet"]=>
+      object(HansOtt\GraphQL\Query\SelectionSet)#23 (2) {
+        ["selections"]=>
+        array(1) {
+          [0]=>
+          object(HansOtt\GraphQL\Query\SelectionField)#22 (6) {
+            ["name"]=>
+            string(6) "author"
+            ["alias"]=>
+            NULL
+            ["arguments"]=>
+            array(0) {
+            }
+            ["directives"]=>
+            array(0) {
+            }
+            ["selectionSet"]=>
+            object(HansOtt\GraphQL\Query\SelectionSet)#21 (2) {
+              ["selections"]=>
+              array(1) {
+                [0]=>
+                object(HansOtt\GraphQL\Query\SelectionField)#20 (6) {
+                  ["name"]=>
+                  string(4) "name"
+                  ["alias"]=>
+                  NULL
+                  ["arguments"]=>
+                  array(0) {
+                  }
+                  ["directives"]=>
+                  array(0) {
+                  }
+                  ["selectionSet"]=>
+                  NULL
+                  ["location"]=>
+                  object(HansOtt\GraphQL\Query\Location)#12 (2) {
+                    ["line"]=>
+                    int(1)
+                    ["column"]=>
+                    int(12)
+                  }
+                }
+              }
+              ["location"]=>
+              object(HansOtt\GraphQL\Query\Location)#10 (2) {
+                ["line"]=>
+                int(1)
+                ["column"]=>
+                int(10)
+              }
+            }
+            ["location"]=>
+            object(HansOtt\GraphQL\Query\Location)#8 (2) {
+              ["line"]=>
+              int(1)
+              ["column"]=>
+              int(3)
+            }
+          }
+        }
+        ["location"]=>
+        object(HansOtt\GraphQL\Query\Location)#6 (2) {
+          ["line"]=>
+          int(1)
+          ["column"]=>
+          int(1)
+        }
+      }
+      ["location"]=>
+      object(HansOtt\GraphQL\Query\Location)#6 (2) {
+        ["line"]=>
+        int(1)
+        ["column"]=>
+        int(1)
+      }
+    }
+  }
+  ["location"]=>
+  object(HansOtt\GraphQL\Query\Location)#6 (2) {
+    ["line"]=>
+    int(1)
+    ["column"]=>
+    int(1)
+  }
+}

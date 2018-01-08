@@ -1,0 +1,130 @@
+# `user` represents one of many users in a graph of data, referred to by a
+# unique identifier.
+{
+  user(id: 4) {
+    name
+  }
+}
+----
+object(HansOtt\GraphQL\Query\Document)#37 (2) {
+  ["definitions"]=>
+  array(1) {
+    [0]=>
+    object(HansOtt\GraphQL\Query\OperationQuery)#36 (5) {
+      ["name"]=>
+      NULL
+      ["variables"]=>
+      array(0) {
+      }
+      ["directives"]=>
+      array(0) {
+      }
+      ["selectionSet"]=>
+      object(HansOtt\GraphQL\Query\SelectionSet)#35 (2) {
+        ["selections"]=>
+        array(1) {
+          [0]=>
+          object(HansOtt\GraphQL\Query\SelectionField)#34 (6) {
+            ["name"]=>
+            string(4) "user"
+            ["alias"]=>
+            NULL
+            ["arguments"]=>
+            array(1) {
+              [0]=>
+              object(HansOtt\GraphQL\Query\Argument)#31 (3) {
+                ["name"]=>
+                string(2) "id"
+                ["value"]=>
+                object(HansOtt\GraphQL\Query\ValueInt)#30 (2) {
+                  ["value"]=>
+                  int(4)
+                  ["location"]=>
+                  object(HansOtt\GraphQL\Query\Location)#16 (2) {
+                    ["line"]=>
+                    int(4)
+                    ["column"]=>
+                    int(12)
+                  }
+                }
+                ["location"]=>
+                object(HansOtt\GraphQL\Query\Location)#12 (2) {
+                  ["line"]=>
+                  int(4)
+                  ["column"]=>
+                  int(9)
+                }
+              }
+            }
+            ["directives"]=>
+            array(0) {
+            }
+            ["selectionSet"]=>
+            object(HansOtt\GraphQL\Query\SelectionSet)#33 (2) {
+              ["selections"]=>
+              array(1) {
+                [0]=>
+                object(HansOtt\GraphQL\Query\SelectionField)#32 (6) {
+                  ["name"]=>
+                  string(4) "name"
+                  ["alias"]=>
+                  NULL
+                  ["arguments"]=>
+                  array(0) {
+                  }
+                  ["directives"]=>
+                  array(0) {
+                  }
+                  ["selectionSet"]=>
+                  NULL
+                  ["location"]=>
+                  object(HansOtt\GraphQL\Query\Location)#22 (2) {
+                    ["line"]=>
+                    int(5)
+                    ["column"]=>
+                    int(6)
+                  }
+                }
+              }
+              ["location"]=>
+              object(HansOtt\GraphQL\Query\Location)#20 (2) {
+                ["line"]=>
+                int(4)
+                ["column"]=>
+                int(16)
+              }
+            }
+            ["location"]=>
+            object(HansOtt\GraphQL\Query\Location)#8 (2) {
+              ["line"]=>
+              int(4)
+              ["column"]=>
+              int(4)
+            }
+          }
+        }
+        ["location"]=>
+        object(HansOtt\GraphQL\Query\Location)#6 (2) {
+          ["line"]=>
+          int(3)
+          ["column"]=>
+          int(2)
+        }
+      }
+      ["location"]=>
+      object(HansOtt\GraphQL\Query\Location)#6 (2) {
+        ["line"]=>
+        int(3)
+        ["column"]=>
+        int(2)
+      }
+    }
+  }
+  ["location"]=>
+  object(HansOtt\GraphQL\Query\Location)#6 (2) {
+    ["line"]=>
+    int(3)
+    ["column"]=>
+    int(2)
+  }
+}

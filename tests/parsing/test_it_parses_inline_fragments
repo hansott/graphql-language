@@ -1,0 +1,227 @@
+{
+  firstSearchResult {
+    ... on Person {
+      name
+    }
+    ... on Photo {
+      height
+    }
+  }
+}
+----
+object(HansOtt\GraphQL\Query\Document)#56 (2) {
+  ["definitions"]=>
+  array(1) {
+    [0]=>
+    object(HansOtt\GraphQL\Query\OperationQuery)#55 (5) {
+      ["name"]=>
+      NULL
+      ["variables"]=>
+      array(0) {
+      }
+      ["directives"]=>
+      array(0) {
+      }
+      ["selectionSet"]=>
+      object(HansOtt\GraphQL\Query\SelectionSet)#54 (2) {
+        ["selections"]=>
+        array(1) {
+          [0]=>
+          object(HansOtt\GraphQL\Query\SelectionField)#53 (6) {
+            ["name"]=>
+            string(17) "firstSearchResult"
+            ["alias"]=>
+            NULL
+            ["arguments"]=>
+            array(0) {
+            }
+            ["directives"]=>
+            array(0) {
+            }
+            ["selectionSet"]=>
+            object(HansOtt\GraphQL\Query\SelectionSet)#52 (2) {
+              ["selections"]=>
+              array(2) {
+                [0]=>
+                object(HansOtt\GraphQL\Query\SelectionInlineFragment)#46 (4) {
+                  ["typeCondition"]=>
+                  object(HansOtt\GraphQL\Query\TypeCondition)#43 (2) {
+                    ["namedType"]=>
+                    object(HansOtt\GraphQL\Query\TypeNamed)#42 (2) {
+                      ["name"]=>
+                      string(6) "Person"
+                      ["location"]=>
+                      object(HansOtt\GraphQL\Query\Location)#16 (2) {
+                        ["line"]=>
+                        int(3)
+                        ["column"]=>
+                        int(13)
+                      }
+                    }
+                    ["location"]=>
+                    object(HansOtt\GraphQL\Query\Location)#14 (2) {
+                      ["line"]=>
+                      int(3)
+                      ["column"]=>
+                      int(10)
+                    }
+                  }
+                  ["directives"]=>
+                  array(0) {
+                  }
+                  ["selectionSet"]=>
+                  object(HansOtt\GraphQL\Query\SelectionSet)#45 (2) {
+                    ["selections"]=>
+                    array(1) {
+                      [0]=>
+                      object(HansOtt\GraphQL\Query\SelectionField)#44 (6) {
+                        ["name"]=>
+                        string(4) "name"
+                        ["alias"]=>
+                        NULL
+                        ["arguments"]=>
+                        array(0) {
+                        }
+                        ["directives"]=>
+                        array(0) {
+                        }
+                        ["selectionSet"]=>
+                        NULL
+                        ["location"]=>
+                        object(HansOtt\GraphQL\Query\Location)#20 (2) {
+                          ["line"]=>
+                          int(4)
+                          ["column"]=>
+                          int(8)
+                        }
+                      }
+                    }
+                    ["location"]=>
+                    object(HansOtt\GraphQL\Query\Location)#18 (2) {
+                      ["line"]=>
+                      int(3)
+                      ["column"]=>
+                      int(20)
+                    }
+                  }
+                  ["location"]=>
+                  object(HansOtt\GraphQL\Query\Location)#12 (2) {
+                    ["line"]=>
+                    int(3)
+                    ["column"]=>
+                    int(6)
+                  }
+                }
+                [1]=>
+                object(HansOtt\GraphQL\Query\SelectionInlineFragment)#51 (4) {
+                  ["typeCondition"]=>
+                  object(HansOtt\GraphQL\Query\TypeCondition)#48 (2) {
+                    ["namedType"]=>
+                    object(HansOtt\GraphQL\Query\TypeNamed)#47 (2) {
+                      ["name"]=>
+                      string(5) "Photo"
+                      ["location"]=>
+                      object(HansOtt\GraphQL\Query\Location)#28 (2) {
+                        ["line"]=>
+                        int(6)
+                        ["column"]=>
+                        int(13)
+                      }
+                    }
+                    ["location"]=>
+                    object(HansOtt\GraphQL\Query\Location)#26 (2) {
+                      ["line"]=>
+                      int(6)
+                      ["column"]=>
+                      int(10)
+                    }
+                  }
+                  ["directives"]=>
+                  array(0) {
+                  }
+                  ["selectionSet"]=>
+                  object(HansOtt\GraphQL\Query\SelectionSet)#50 (2) {
+                    ["selections"]=>
+                    array(1) {
+                      [0]=>
+                      object(HansOtt\GraphQL\Query\SelectionField)#49 (6) {
+                        ["name"]=>
+                        string(6) "height"
+                        ["alias"]=>
+                        NULL
+                        ["arguments"]=>
+                        array(0) {
+                        }
+                        ["directives"]=>
+                        array(0) {
+                        }
+                        ["selectionSet"]=>
+                        NULL
+                        ["location"]=>
+                        object(HansOtt\GraphQL\Query\Location)#32 (2) {
+                          ["line"]=>
+                          int(7)
+                          ["column"]=>
+                          int(8)
+                        }
+                      }
+                    }
+                    ["location"]=>
+                    object(HansOtt\GraphQL\Query\Location)#30 (2) {
+                      ["line"]=>
+                      int(6)
+                      ["column"]=>
+                      int(19)
+                    }
+                  }
+                  ["location"]=>
+                  object(HansOtt\GraphQL\Query\Location)#24 (2) {
+                    ["line"]=>
+                    int(6)
+                    ["column"]=>
+                    int(6)
+                  }
+                }
+              }
+              ["location"]=>
+              object(HansOtt\GraphQL\Query\Location)#10 (2) {
+                ["line"]=>
+                int(2)
+                ["column"]=>
+                int(22)
+              }
+            }
+            ["location"]=>
+            object(HansOtt\GraphQL\Query\Location)#8 (2) {
+              ["line"]=>
+              int(2)
+              ["column"]=>
+              int(4)
+            }
+          }
+        }
+        ["location"]=>
+        object(HansOtt\GraphQL\Query\Location)#6 (2) {
+          ["line"]=>
+          int(1)
+          ["column"]=>
+          int(1)
+        }
+      }
+      ["location"]=>
+      object(HansOtt\GraphQL\Query\Location)#6 (2) {
+        ["line"]=>
+        int(1)
+        ["column"]=>
+        int(1)
+      }
+    }
+  }
+  ["location"]=>
+  object(HansOtt\GraphQL\Query\Location)#6 (2) {
+    ["line"]=>
+    int(1)
+    ["column"]=>
+    int(1)
+  }
+}
